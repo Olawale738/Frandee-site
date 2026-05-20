@@ -1,0 +1,129 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+  USER
+}
+
+enum ProjectStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  projects     Project[] @relation("ProjectOwner")
+  contactSubmissions ContactSubmission[]
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  summary     String
+  description String   @db.Text
+  icon        String?  // lucide icon name or image path
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Equipment {
+  id            String   @id @default(cuid())
+  name          String
+  category      String   // e.g. "Geophysics", "Surveying", "Sampling"
+  manufacturer  String?
+  model         String?
+  quantity      Int      @default(1)
+  status        String   @default("AVAILABLE") // AVAILABLE | DEPLOYED | MAINTENANCE
+  description   String?  @db.Text
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+}
+
+model Software {
+  id           String   @id @default(cuid())
+  name         String
+  vendor       String?
+  version      String?
+  licenseType  String?  // perpetual | subscription | open-source
+  seats        Int      @default(1)
+  description  String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  client      String?
+  location    String?
+  category    String        // "Mineral Exploration" | "Geophysical Survey" | "Field Operations" | "Conference"
+  status      ProjectStatus @default(ACTIVE)
+  summary     String
+  description String        @db.Text
+  startDate   DateTime?
+  endDate     DateTime?
+  coverImage  String?
+  gallery     String[]      @default([])
+  tags        String[]      @default([])
+
+  ownerId     String?
+  owner       User?         @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([category])
+  @@index([status])
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  ip        String?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actor     String?
+  action    String
+  target    String?
+  details   String?  @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([action])
+  @@index([createdAt])
+}

@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend (api)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: frandee
+          POSTGRES_PASSWORD: frandee_pass
+          POSTGRES_DB: frandee
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U frandee -d frandee"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+    defaults:
+      run: { working-directory: backend }
+    env:
+      DATABASE_URL: postgres://frandee:frandee_pass@localhost:5432/frandee
+      JWT_SECRET: ci_only_secret_64chars_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm', cache-dependency-path: backend/package-lock.json }
+      - run: npm install --no-audit --no-fund
+      - run: npx prisma validate
+      - run: npx prisma generate
+      - run: npm run typecheck
+      - run: npm run build
+      # Optional: run migrations against the service postgres
+      - run: npx prisma migrate deploy || true
+
+  frontend:
+    name: Frontend (web)
+    runs-on: ubuntu-latest
+    defaults:
+      run: { working-directory: frontend }
+    env:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm', cache-dependency-path: frontend/package-lock.json }
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build

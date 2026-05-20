@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: frandee_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: frandee
+      POSTGRES_PASSWORD: frandee_pass
+      POSTGRES_DB: frandee
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U frandee -d frandee"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: frandee_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://frandee:frandee_pass@db:5432/frandee
+      JWT_SECRET: dev_local_secret_change_me_64chars_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      FRONTEND_URL: http://localhost:3000
+      NODE_ENV: development
+      PORT: "4000"
+      FORCE_HTTPS: "false"
+      SMTP_HOST: ""
+      SMTP_PORT: "587"
+      SMTP_USER: ""
+      SMTP_PASS: ""
+      CONTACT_TO: "info@frandeeconsult.com"
+      SENTRY_DSN: ""
+    ports:
+      - "4000:4000"
+    command: sh -c "npx prisma migrate deploy && npm run start"
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frandee_web
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_PUBLIC_SENTRY_DSN: ""
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres-data:
