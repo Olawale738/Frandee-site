@@ -350,6 +350,8 @@ Three providers, all on generous free tiers:
 
 You can swap any of them later (Render → Railway/Fly, Vercel → Cloudflare Pages, Supabase → Neon/RDS) — the steps are equivalent.
 
+> **Hosting on LyteHosting (shared / VPS)?** See [HOST_LYTEHOSTING.md](./HOST_LYTEHOSTING.md) — it covers three options: static export to shared cPanel, full Node.js app via cPanel's "Setup Node.js App", and a VPS path with Nginx + PM2.
+
 ### 7.1 Push your repo (already done)
 
 ```bash
@@ -629,10 +631,4 @@ These are already in the codebase:
 - `cors` allowlist via `FRONTEND_URL`
 - `express-rate-limit` (240 req/min/IP global, 10 / 15 min on `/api/contact`)
 - Contact-form honeypot
-- `bcryptjs` (cost 12) for password hashing
-- `FORCE_HTTPS=true` redirect using `x-forwarded-proto`
-- JWT 7-day expiry; rotate `JWT_SECRET` to force-logout everyone
-
-Additional hardening to consider:
-
-1. **Move JWT to an httpOnly cookie.** This requires both apps to be on the sa
+- `bcryptjs` (cost 12) for password has

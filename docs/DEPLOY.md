@@ -3,6 +3,11 @@
 This is the canonical checklist for taking the Frandee Consulting Services web app from
 local Docker to a live, secure, monitored deployment.
 
+**Hosting options covered:**
+
+- **Vercel + Render + Supabase** (this file + [SETUP.md](./SETUP.md)) — recommended for most teams.
+- **LyteHosting shared / VPS** — see [HOST_LYTEHOSTING.md](./HOST_LYTEHOSTING.md).
+
 ## 1. Domain & DNS
 
 1. Register the domain (e.g. `frandeeconsult.com`).
@@ -54,13 +59,4 @@ local Docker to a live, secure, monitored deployment.
    ```bash
    npx prisma migrate deploy
    # If the pooled connection rejects the seed (rare), force it through the direct URL:
-   DATABASE_URL="$DIRECT_URL" npx prisma db seed
-   ```
-6. Verify health:
-   ```bash
-   curl https://api.frandeeconsult.com/api/health
-   ```
-
-## 4. Create / rotate admin
-
-If you need to create the first admin via API (
+ 

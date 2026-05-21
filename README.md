@@ -82,4 +82,6 @@ frandee-site/
 └─ .github/workflows/ci.yml
 ```
 
-See `docs/DEPLOY.md` 
+## Deployment
+
+- **Co
