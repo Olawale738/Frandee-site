@@ -29,7 +29,10 @@ services:
       db:
         condition: service_healthy
     environment:
+      # Local dev: DATABASE_URL and DIRECT_URL point at the same local Postgres.
+      # In production on Supabase they differ (pooled vs direct). See backend/.env.example.
       DATABASE_URL: postgres://frandee:frandee_pass@db:5432/frandee
+      DIRECT_URL: postgres://frandee:frandee_pass@db:5432/frandee
       JWT_SECRET: dev_local_secret_change_me_64chars_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       FRONTEND_URL: http://localhost:3000
       NODE_ENV: development
@@ -53,13 +56,3 @@ services:
     restart: unless-stopped
     depends_on:
       - api
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:4000/api
-      NEXT_PUBLIC_SITE_URL: http://localhost:3000
-      NEXT_PUBLIC_SENTRY_DSN: ""
-      NODE_ENV: development
-    ports:
-      - "3000:3000"
-
-volumes:
-  postgres-data:

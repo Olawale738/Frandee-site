@@ -9,7 +9,7 @@ exploration, geophysics, mineral consulting and field operations.
 - **Auth:** JWT (HTTP‑only ready) with role-based access (`ADMIN`, `STAFF`, `USER`)
 - **Add‑ons:** Contact form (nodemailer), PDF report generation (pdfkit),
   full‑text search, Sentry error tracking
-- **Infra:** Docker Compose for local dev; Vercel + Render/Railway for production
+- **Infra:** Docker Compose for local dev; **Vercel (frontend) + Render (API) + Supabase (Postgres)** for production
 - **CI:** GitHub Actions — lint, typecheck, prisma validate, build
 
 ---
@@ -82,4 +82,4 @@ frandee-site/
 └─ .github/workflows/ci.yml
 ```
 
-See `docs/DEPLOY.md` for the full production checklist.
+See `docs/DEPLOY.md` 

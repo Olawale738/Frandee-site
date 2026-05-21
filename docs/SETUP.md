@@ -20,10 +20,11 @@ If anything below conflicts with `docs/DEPLOY.md`, this file wins.
                                           /admin dashboard (JWT in localStorage)
      │
      ▼ HTTPS, JSON
-[ Render / Railway (Express API) ]  --->  /api/*  endpoints
+[ Render (Express API) ]  --->  /api/*  endpoints
      │
-     ▼ TCP, password
-[ Managed PostgreSQL 16 ]
+     ▼ TCP + TLS via pgBouncer (pooled) for queries,
+        direct connection (port 5432) only for migrations
+[ Supabase PostgreSQL 16 ]
 ```
 
 - **Frontend** is fully static-rendered (ISR with `revalidate: 300`) and pulls JSON from the API at build time and every 5 minutes.
@@ -225,7 +226,8 @@ npm run dev    # starts at http://localhost:3000
 
 | Variable        | Required | Example                                     | What it does                                                         |
 |-----------------|----------|---------------------------------------------|----------------------------------------------------------------------|
-| `DATABASE_URL`  | yes      | `postgres://user:pass@host:5432/frandee`    | Connection string Prisma uses.                                       |
+| `DATABASE_URL`  | yes      | Supabase **Transaction Pooler** URL (port 6543, ends with `?pgbouncer=true&connection_limit=1`) | Prisma runtime queries. Pooled for low connection count. |
+| `DIRECT_URL`    | yes      | Supabase **Direct Connection** URL (port 5432) | Prisma migrations and introspection only. Bypasses pgBouncer. In local Docker dev set equal to `DATABASE_URL`. |
 | `JWT_SECRET`    | yes      | 64-char random hex                          | Signs and verifies JWTs. Change it and everyone gets logged out.     |
 | `PORT`          | no       | `4000`                                      | HTTP port for the API. Render auto-binds.                            |
 | `NODE_ENV`      | yes      | `production` / `development`                | Controls logging, error verbosity, Prisma log level.                 |
@@ -334,13 +336,19 @@ Edit the relevant page under `frontend/pages/`:
 ## 7. Production deployment — recommended split
 
 ```
-┌────────────────────────┐        ┌──────────────────────────┐
-│  Vercel (frontend)     │ ─────► │  Render (API + Postgres) │
-│  www.frandeeconsult.com│        │  api.frandeeconsult.com  │
-└────────────────────────┘        └──────────────────────────┘
+┌────────────────────────┐     ┌───────────────────┐     ┌─────────────────────┐
+│  Vercel (frontend)     │ ──► │  Render (API)     │ ──► │  Supabase (Postgres)│
+│  www.frandeeconsult.com│     │  api.frandee...   │     │  .pooler.supabase…  │
+└────────────────────────┘     └───────────────────┘     └─────────────────────┘
 ```
 
-You can swap Render for Railway, Fly.io, AWS App Runner, or a single VPS — the steps are equivalent. Below uses **Vercel + Render** because it's the cheapest end-to-end with free tiers.
+Three providers, all on generous free tiers:
+
+- **Supabase** for managed PostgreSQL 16 (plus pgBouncer connection pooling, point-in-time recovery on the paid tier, and a SQL/table UI in the browser).
+- **Render** for the Express API.
+- **Vercel** for the Next.js frontend.
+
+You can swap any of them later (Render → Railway/Fly, Vercel → Cloudflare Pages, Supabase → Neon/RDS) — the steps are equivalent.
 
 ### 7.1 Push your repo (already done)
 
@@ -348,18 +356,46 @@ You can swap Render for Railway, Fly.io, AWS App Runner, or a single VPS — the
 git push origin main
 ```
 
-### 7.2 Create the database on Render
+### 7.2 Create the database on Supabase
 
-1. Sign in to https://dashboard.render.com.
-2. **New → PostgreSQL.** Choose a name (`frandee-prod`), region close to your users, and the Free or Starter plan.
-3. Once it provisions, open the dashboard and copy the **External Database URL**.
-4. Save it — you'll paste it into the API service in a moment.
+1. Sign in to https://supabase.com.
+2. **New project.**
+   - **Name:** `frandee-prod`
+   - **Database password:** generate a strong one and store it in a password manager — you'll need it for the connection strings. **Supabase doesn't show it again** after this step.
+   - **Region:** pick the one closest to your Render region (e.g. both in `eu-west` or both in `us-east`). Cross-region latency between Render and Supabase is the single biggest performance footgun.
+   - **Pricing plan:** Free tier is fine to start; upgrade to Pro for daily PITR backups and more bandwidth.
+3. Wait ~2 minutes for the project to provision.
+4. Get the two connection strings:
+   - **Project Settings → Database → Connection string → URI tab.**
+   - At the top, select **Connection pooling → Transaction (port 6543)**. This is your `DATABASE_URL`. Copy it; it looks like:
+     ```
+     postgres://postgres.<ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres
+     ```
+     **Append** `?pgbouncer=true&connection_limit=1` to the end:
+     ```
+     postgres://postgres.<ref>:<password>@aws-0-<region>.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1
+     ```
+   - Switch the same widget to **Connection pooling → Session (port 5432)** (or click **Direct connection** if your project is on the older UI). This is your `DIRECT_URL`. It looks like:
+     ```
+     postgres://postgres.<ref>:<password>@aws-0-<region>.pooler.supabase.com:5432/postgres
+     ```
+5. Replace `<password>` in both strings with your actual password (URL-encode any special characters: `@ → %40`, `: → %3A`, `/ → %2F`, etc.).
+6. Quickly verify the connection from your laptop:
+   ```bash
+   psql "<your DIRECT_URL>"
+   # If you don't have psql installed, skip this — Render will fail loudly if it can't connect.
+   ```
+
+> Why two URLs? Prisma's migrations run DDL statements (`CREATE TABLE`, `CREATE INDEX`, etc.) that pgBouncer in transaction mode rejects. So we point the app at the pooled port (6543) and migrations at the direct port (5432). This is the official Prisma + Supabase pattern.
 
 ### 7.3 Create the API service on Render
 
-1. **New → Web Service.**
-2. Connect your GitHub account and pick `Olawale738/Frandee-site`.
-3. Configure:
+1. Sign in to https://dashboard.render.com.
+2. **New → Web Service.**
+3. Connect your GitHub account and pick `Olawale738/Frandee-site`.
+4. Configure:
+   - **Name:** `frandee-api`
+   - **Region:** **same region as Supabase** (matters a lot for query latency).
    - **Root Directory:** `backend`
    - **Environment:** `Node`
    - **Build Command:**
@@ -371,18 +407,33 @@ git push origin main
      npx prisma migrate deploy && npm run start
      ```
    - **Health Check Path:** `/api/health`
-4. Under **Environment**, add every variable from §5.1. Use the External DB URL from step 7.2 for `DATABASE_URL`. Generate a fresh `JWT_SECRET` with `openssl rand -hex 32`.
-5. Click **Create Web Service**. First boot takes 2–5 minutes.
+   - **Plan:** Free is fine to start (cold-starts after ~15 min of idleness — pay $7/mo for always-on).
+5. Under **Environment**, add every variable from §5.1. Paste:
+   - `DATABASE_URL` = the **pooled** URL (port 6543) from step 7.2.4.
+   - `DIRECT_URL` = the **direct** URL (port 5432) from step 7.2.4.
+   - `JWT_SECRET` = generate with `openssl rand -hex 32`.
+   - `FRONTEND_URL` = your Vercel URL (set after §7.4) — for now use `*` temporarily, but tighten it before going live.
+   - `NODE_ENV` = `production`
+   - `FORCE_HTTPS` = `true`
+   - `CONTACT_TO` = `info@frandeeconsult.com`
+6. Click **Create Web Service**. First boot takes 2–5 minutes.
 
 After it's up:
 
 ```bash
 # verify
-curl https://YOUR-API.onrender.com/api/health
+curl https://frandee-api.onrender.com/api/health
 # {"ok":true,"ts":"..."}
 
 # seed (one time) — open the "Shell" tab on Render and run:
 npx prisma db seed
+```
+
+If the seed errors out with `prepared statement "s1" already exists` or similar, that's pgBouncer in transaction mode rejecting prepared statements. The fix is to seed via `DIRECT_URL`:
+
+```bash
+# Inside the Render shell:
+DATABASE_URL="$DIRECT_URL" npx prisma db seed
 ```
 
 ### 7.4 Deploy the frontend to Vercel
@@ -517,32 +568,43 @@ For Google Tag Manager, add the `<script>` block to `_document.tsx`'s `<Head>` a
 
 ### 10.1 Monitoring checklist
 
-| Signal                          | Where to check                            | Alert threshold              |
-|---------------------------------|-------------------------------------------|------------------------------|
-| API uptime                      | Render dashboard → Metrics                | 5xx > 1 % over 5 min         |
-| Frontend traffic                | Vercel Analytics                          | RPS drop > 50 % vs baseline  |
-| Database CPU                    | Render Postgres → Metrics                 | > 80 % for 10 min            |
-| Database disk                   | Render Postgres → Metrics                 | > 80 %                       |
-| Error tracking                  | Sentry                                    | new error fingerprint        |
-| SSL expiry                      | n/a — auto-renewed                        | n/a                          |
+| Signal                          | Where to check                                                       | Alert threshold              |
+|---------------------------------|----------------------------------------------------------------------|------------------------------|
+| API uptime                      | Render dashboard → Metrics                                           | 5xx > 1 % over 5 min         |
+| Frontend traffic                | Vercel Analytics                                                     | RPS drop > 50 % vs baseline  |
+| Database CPU / IO               | Supabase → Reports → Database                                        | sustained > 80 %             |
+| Pooler connections              | Supabase → Reports → Database → Connection pooler                    | > 90 % of pool capacity      |
+| DB disk usage                   | Supabase → Reports → Database                                        | > 80 %                       |
+| Error tracking                  | Sentry                                                               | new error fingerprint        |
+| SSL expiry                      | n/a — auto-renewed by Vercel and Render                              | n/a                          |
 
-Render and Vercel both send email alerts on deploy failures and downtime.
+Supabase, Render, and Vercel all send email alerts on incidents and deploy failures.
 
 ### 10.2 Backups
 
-Render Postgres has **daily automatic snapshots**, retained on the Standard plan and above (free tier has shorter retention). Configure:
+Supabase backup policy by plan:
 
-- Render → Postgres → Backups → set **30-day retention**.
-- Once a quarter, run a **restore drill** into a sandbox database:
-  - Render → Backups → pick a snapshot → "Restore to new database".
-  - Connect to the restored DB and verify row counts match production.
+| Plan        | Daily snapshots | PITR (point-in-time recovery)  | Retention            |
+|-------------|------------------|--------------------------------|----------------------|
+| Free        | Yes (1/day)      | No                             | 7 days               |
+| Pro         | Yes              | Yes (down to 2 minutes)        | 7 days (extendable)  |
+| Team / Ent. | Yes              | Yes                            | 14–28 days           |
 
-To export off-site:
+Restore drill (once per quarter):
+
+1. Supabase dashboard → Project → **Database → Backups** → pick a snapshot.
+2. Click **Restore** and choose **Restore to a new project** (don't overwrite production).
+3. Connect to the restored project's `DIRECT_URL` and verify row counts (`select count(*) from "Project";` etc.) match what you expect.
+4. Delete the sandbox project when done.
+
+Off-site export (recommended weekly even with Supabase backups, so you're never locked in):
 
 ```bash
-pg_dump "$DATABASE_URL" -Fc -f frandee-$(date +%F).dump
-# Then upload to S3 / Backblaze B2 / Cloudflare R2.
+pg_dump "$DIRECT_URL" -Fc -f frandee-$(date +%F).dump
+# Then upload to S3 / Backblaze B2 / Cloudflare R2 via aws-cli or rclone.
 ```
+
+Automate the off-site dump with a GitHub Actions cron workflow if you prefer (see §13 action item 7).
 
 ### 10.3 Releasing a new version
 
@@ -573,81 +635,4 @@ These are already in the codebase:
 
 Additional hardening to consider:
 
-1. **Move JWT to an httpOnly cookie.** This requires both apps to be on the same apex (e.g. `frandeeconsult.com` and `api.frandeeconsult.com`) and adding `SameSite=Lax; Secure; HttpOnly` cookie issuance in `routes/auth.ts`. It eliminates XSS-stealable tokens.
-2. **Set a CSP.** Add a `Content-Security-Policy` header in `frontend/next.config.js` once you've finalised your third-party scripts.
-3. **Rate-limit login attempts.** Add a tighter `rate-limit` middleware to `/api/auth/login` to slow brute force.
-4. **Periodically rotate `JWT_SECRET`** (e.g. every 90 days). Document this in your runbook.
-5. **Subresource Integrity** on any external scripts you add.
-6. **Enable 2FA** on GitHub, Vercel, and Render accounts.
-
----
-
-## 12. Troubleshooting
-
-### "ECONNREFUSED 127.0.0.1:5432" when starting the API
-
-Postgres isn't ready yet. With Docker, the `api` service uses `depends_on: condition: service_healthy`, so wait until you see `frandee_db ... healthy`. Bare-metal: make sure `psql -h localhost -U frandee -d frandee` works first.
-
-### `prisma migrate dev` fails with "Environment variable not found: DATABASE_URL"
-
-You're running it from the wrong directory or `backend/.env` is missing. Run inside `backend/` and ensure the file exists.
-
-### Login returns "Invalid credentials" even with the seeded password
-
-You probably ran `prisma migrate` after the seed, which doesn't drop data but **does** if you re-seed on a wiped DB. Run the seed again: `docker compose exec api npx prisma db seed`.
-
-### Contact form returns 429
-
-You've been rate-limited (10 submissions / 15 minutes / IP). Wait or test from a different IP.
-
-### Images don't appear in production
-
-- Confirm the files are in `frontend/public/images/...` and were committed (`git ls-files | grep images | wc -l` should report 65).
-- Vercel caches static assets aggressively; trigger a redeploy if you've just added new images.
-
-### Sentry isn't capturing errors
-
-- Verify the DSN is set on **both** environments (frontend and backend).
-- On Render, restart the service after adding the env var — env changes don't hot-reload.
-- Send a test error from the backend: temporarily uncomment a `throw new Error('test')` in a route handler.
-
-### CORS error in the browser console
-
-`FRONTEND_URL` on the API doesn't include the origin the browser is using. Set it to a comma-separated list of every allowed origin (no trailing slash).
-
-### "JWT expired" right after login
-
-Server clock skew with the database / load balancer. JWTs include `iat`/`exp` based on the **API server's** clock. If you see this on Render, file a support ticket — it's rare.
-
-### Docker build cache is stale after a code change
-
-```bash
-docker compose build --no-cache
-docker compose up
-```
-
-### Prisma client out of sync after editing the schema
-
-```bash
-cd backend
-npx prisma generate
-# If you changed the schema:
-npx prisma migrate dev --name <descriptive_name>
-```
-
----
-
-## 13. What to do next (your action items)
-
-| Step | Action                                                                                       |
-|------|----------------------------------------------------------------------------------------------|
-| 1    | Rotate the GitHub PAT you shared in chat (settings → tokens → revoke + regenerate).          |
-| 2    | Sign in locally (`docker compose up`), confirm the site works, **change the admin password** by signing in, opening the browser console, and calling `fetch('/api/auth/...')` against your own endpoint — or create a `POST /api/auth/change-password` route as your first real customisation. |
-| 3    | Deploy backend to Render, frontend to Vercel (§7).                                           |
-| 4    | Register the domain and wire DNS (§8).                                                       |
-| 5    | Set up a transactional mail provider for the contact form (§9.1).                            |
-| 6    | Create the Sentry projects and paste the DSNs (§9.2).                                        |
-| 7    | Schedule a quarterly backup restore drill (§10.2).                                           |
-| 8    | Run a vulnerability scan (`npm audit`, GitHub Dependabot) and enable security alerts.        |
-| 9    | Edit `backend/prisma/seed.ts` with your real services / equipment / projects copy and re-seed. |
-| 10   | (Optional) Build out the admin UI under `frontend/pages/admin/` so non-technical staff can edit content without curl. |
+1. **Move JWT to an httpOnly cookie.** This requires both apps to be on the sa

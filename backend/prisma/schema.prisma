@@ -4,8 +4,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // Runtime connection — Supabase Transaction Pooler (port 6543, pgbouncer=true).
+  // For local Docker dev this is just the plain postgres URL.
+  url       = env("DATABASE_URL")
+  // Migrations and introspection — Supabase Direct Connection (port 5432).
+  // Required because pgBouncer (transaction mode) doesn't support all of
+  // Prisma's DDL features. Safe to leave equal to DATABASE_URL in local dev.
+  directUrl = env("DIRECT_URL")
 }
 
 enum Role {
@@ -108,22 +114,4 @@ model ContactSubmission {
   subject   String?
   message   String   @db.Text
   ip        String?
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  createdAt DateTime @default(now())
-
-  @@index([email])
-  @@index([createdAt])
-}
-
-model AuditLog {
-  id        String   @id @default(cuid())
-  actor     String?
-  action    String
-  target    String?
-  details   String?  @db.Text
-  createdAt DateTime @default(now())
-
-  @@index([action])
-  @@index([createdAt])
-}
+  userId
