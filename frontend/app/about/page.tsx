@@ -15,8 +15,7 @@ const milestones = [
   { year: '2010', title: 'Company Founded', description: 'Dr. Okonkwo establishes Frandee Geoscience in Yenagoa, Bayelsa State, with a vision to deliver world-class geoscience intelligence to African exploration.' },
   { year: '2013', title: 'Regional Expansion', description: 'Expanded operations to 8 West African countries, completing 30+ exploration programs for junior and mid-tier mining companies.' },
   { year: '2016', title: 'GIS Technology Center', description: 'Launched dedicated GIS and remote sensing technology center, integrating machine learning for large-scale geological mapping.' },
-  { year: '2019', title: 'Research Partnership', description: 'Established research partnerships with University of Lagos, University of Ghana, and University of Cape Town.' },
-  { year: '2022', title: 'ISO Certification', description: 'Achieved ISO 9001:2015 certification for quality management systems across all geoscience service lines.' },
+{ year: '2022', title: 'ISO Certification', description: 'Achieved ISO 9001:2015 certification for quality management systems across all geoscience service lines.' },
   { year: '2024', title: '250+ Projects', description: 'Completed our 250th project milestone, spanning 22 countries and generating over 150 drill-ready targets.' },
 ];
 
