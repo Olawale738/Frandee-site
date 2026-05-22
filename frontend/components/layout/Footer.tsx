@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Mail, Phone, Linkedin, Twitter, Youtube } from 'lucide-react';
+import { MapPin, Mail, Phone, Linkedin, Youtube, Facebook, MessageCircle } from 'lucide-react';
 
 const services = [
   { name: 'Geological Mapping', href: '/services#geological' },
@@ -59,9 +59,10 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               {[
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Youtube, href: '#', label: 'YouTube' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/company/43282326/', label: 'LinkedIn' },
+                { icon: Facebook, href: 'https://www.facebook.com/share/15xP1xt7PQ/', label: 'Facebook' },
+                { icon: Youtube, href: 'https://youtube.com/@frandeeconsulting', label: 'YouTube' },
+                { icon: MessageCircle, href: 'https://wa.me/message/OTFG6GTCJ66PP1', label: 'WhatsApp' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
