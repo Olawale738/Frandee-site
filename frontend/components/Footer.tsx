@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { SITE } from '../lib/site';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   return (
@@ -6,12 +8,15 @@ export default function Footer() {
       <div className="container-wide grid gap-8 py-12 md:grid-cols-4">
         <div>
           <h3 className="font-display text-lg font-semibold text-brand-800">
-            Frandee Consulting Services
+            {SITE.name}
           </h3>
           <p className="mt-2 text-sm text-slate-600">
             Mineral exploration, geophysical surveying and field operations across Nigeria
             and West Africa.
           </p>
+          <div className="mt-4">
+            <SocialLinks />
+          </div>
         </div>
         <div>
           <h4 className="text-sm font-semibold text-slate-900">Company</h4>
@@ -32,15 +37,10 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-semibold text-slate-900">Reach us</h4>
           <ul className="mt-3 space-y-2 text-sm text-slate-600">
-            <li>Lokoja, Kogi State, Nigeria</li>
-            <li>info@frandeeconsult.com</li>
-            <li>+234 (0) 800 000 0000</li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Frandee Consulting Services. All rights reserved.
-      </div>
-    </footer>
-  );
-}
+            <li>{SITE.contact.address}</li>
+            <li>
+              <a href={`mailto:${SITE.contact.email}`} className="hover:text-brand-700">
+                {SITE.contact.email}
+              </a>
+            </li>
+            <li>{SITE.contact.
