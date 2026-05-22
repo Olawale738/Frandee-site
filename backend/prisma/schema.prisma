@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearchPostgres"]
+  previewFeatures = []
 }
 
 datasource db {
@@ -114,4 +114,7 @@ model ContactSubmission {
   subject   String?
   message   String   @db.Text
   ip        String?
-  userId
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
