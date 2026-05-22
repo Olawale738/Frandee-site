@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronDown, Layers, Activity, Globe, Target } from 'lucide-react';
 
@@ -81,15 +82,29 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-geo-black">
+      {/* Cinematic field photo background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/field-operations/field-03.jpg"
+          alt="Frandee Geoscience field team"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-geo-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-geo-black/90 via-geo-black/60 to-geo-black/30" />
+      </div>
+
       {/* Animated canvas background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-100"
+        className="absolute inset-0 w-full h-full opacity-60"
         style={{ mixBlendMode: 'screen' }}
       />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 geo-grid-bg" />
+      <div className="absolute inset-0 geo-grid-bg opacity-40" />
 
       {/* Deep radial gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(6,182,212,0.08),transparent)]" />

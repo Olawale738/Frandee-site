@@ -19,7 +19,7 @@ const posts = [
     author: 'Chukwudi Nwosu',
     date: 'May 10, 2026',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=800&q=80',
+    image: '/images/students/student-01.jpg',
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ const posts = [
     author: 'Dr. Fatima Ibrahim',
     date: 'April 28, 2026',
     readTime: '12 min read',
-    image: 'https://images.unsplash.com/photo-1454789476662-53eb23ba5907?w=800&q=80',
+    image: '/images/ves-ert/ves-02.jpg',
     featured: true,
   },
   {
@@ -41,7 +41,7 @@ const posts = [
     author: 'Amina Yusuf',
     date: 'April 15, 2026',
     readTime: '10 min read',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+    image: '/images/ves-ert/ves-04.jpg',
     featured: false,
   },
   {
@@ -52,7 +52,7 @@ const posts = [
     author: 'Dr. Adeyemi Okonkwo',
     date: 'March 30, 2026',
     readTime: '9 min read',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    image: '/images/field-operations/field-06.jpg',
     featured: false,
   },
   {
@@ -63,7 +63,7 @@ const posts = [
     author: 'Chukwudi Nwosu',
     date: 'March 12, 2026',
     readTime: '11 min read',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    image: '/images/field-operations/field-01.jpg',
     featured: false,
   },
   {
@@ -74,7 +74,7 @@ const posts = [
     author: 'Dr. Adeyemi Okonkwo',
     date: 'February 28, 2026',
     readTime: '15 min read',
-    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80',
+    image: '/images/mineral-exploration/mineral-03.jpg',
     featured: false,
   },
 ];

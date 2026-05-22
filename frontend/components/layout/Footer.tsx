@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Mail, Phone, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Mail, Phone, Linkedin, Twitter, Youtube } from 'lucide-react';
 
 const services = [
   { name: 'Geological Mapping', href: '/services#geological' },
@@ -15,10 +16,9 @@ const services = [
 ];
 
 const company = [
-  { name: 'About Us', href: '/about' },
-  { name: 'Our Team', href: '/team' },
+  { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Research', href: '/research' },
+  { name: 'Research & Publications', href: '/research' },
   { name: 'Training', href: '/training' },
   { name: 'Blog', href: '/blog' },
   { name: 'Careers', href: '/careers' },
@@ -38,24 +38,30 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 group mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-geo-copper to-geo-cyan flex items-center justify-center shadow-copper">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden ring-1 ring-geo-copper/30 group-hover:ring-geo-copper/60 transition-all duration-300 shadow-copper flex-shrink-0">
+                <Image
+                  src="/images/logo/frandee-logo.jpg"
+                  alt="Frandee Geoscience"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div>
                 <span className="text-xl font-bold font-display text-white">Frandee</span>
-                <span className="block text-[10px] text-geo-cyan font-mono tracking-widest uppercase">Geoscience</span>
+                <span className="block text-[10px] text-geo-cyan font-mono tracking-widest uppercase">Consulting Services</span>
               </div>
             </Link>
+            <p className="text-sm text-slate-400 leading-relaxed mb-2">
+              <em className="text-geo-copper not-italic font-medium">Telling the story beneath the earth.</em>
+            </p>
             <p className="text-sm text-slate-400 leading-relaxed mb-5">
-              Full-stack geoscience services — from reconnaissance to drill-ready targets. Serving exploration companies, governments, and research institutions worldwide.
+              Expert geoscience consulting — from field surveys to published research. Serving exploration companies, governments, and academia across Africa.
             </p>
             <div className="flex items-center gap-3">
               {[
                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
                 { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Github, href: '#', label: 'GitHub' },
+                { icon: Youtube, href: '#', label: 'YouTube' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -110,15 +116,19 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-geo-copper mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-slate-400">
-                  123 Geological Drive<br />
-                  Earth Sciences Building<br />
                   Lagos, Nigeria
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-geo-copper flex-shrink-0" />
-                <a href="mailto:info@frandeegeoscience.com" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  info@frandeegeoscience.com
+                <a href="mailto:dr.francis@frandeeconsultingservices.com" className="text-sm text-slate-400 hover:text-white transition-colors break-all">
+                  dr.francis@frandeeconsultingservices.com
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-geo-copper flex-shrink-0" />
+                <a href="mailto:contact@frandeeconsultingservices.com" className="text-sm text-slate-400 hover:text-white transition-colors break-all">
+                  contact@frandeeconsultingservices.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -129,10 +139,10 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Certifications badge */}
-            <div className="mt-6 p-3 rounded-xl bg-geo-panel border border-geo-border/40">
-              <div className="text-[10px] font-mono text-geo-cyan tracking-widest uppercase mb-1">Certified By</div>
-              <div className="text-xs text-slate-400">ISO 9001 · GISP · SEG · AGU</div>
+            {/* Tagline badge */}
+            <div className="mt-6 p-3 rounded-xl bg-geo-panel border border-geo-copper/20">
+              <div className="text-[10px] font-mono text-geo-copper tracking-widest uppercase mb-1">Expertise</div>
+              <div className="text-xs text-slate-400">Geology · Geophysics · GIS · Research Support</div>
             </div>
           </div>
         </div>
@@ -140,10 +150,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-6 border-t border-geo-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Frandee Geoscience. All rights reserved.
+            © {new Date().getFullYear()} Frandee Consulting Services. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
+            {['Privacy Policy', 'Terms of Service'].map((item) => (
               <Link key={item} href="#" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">
                 {item}
               </Link>

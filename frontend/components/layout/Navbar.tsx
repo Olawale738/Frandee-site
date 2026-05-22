@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu, X, ChevronDown, MapPin, Layers, Activity,
   Globe, Droplets, FlaskConical, Target, BarChart3,
-  FileText, GraduationCap, BookOpen, Phone, Briefcase,
-  Newspaper, Users, Building2,
+  FileText, Phone, Briefcase,
 } from 'lucide-react';
 
 const services = [
@@ -27,7 +27,6 @@ const navLinks = [
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services', hasDropdown: true },
   { name: 'Projects', href: '/projects' },
-  { name: 'Team', href: '/team' },
   { name: 'Research', href: '/research' },
   { name: 'Training', href: '/training' },
   { name: 'Blog', href: '/blog' },
@@ -79,13 +78,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-              <div className="relative">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-geo-copper to-geo-cyan flex items-center justify-center shadow-copper">
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-br from-geo-copper to-geo-cyan opacity-0 group-hover:opacity-40 blur transition-opacity duration-300" />
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden ring-1 ring-geo-copper/30 group-hover:ring-geo-copper/60 transition-all duration-300 shadow-copper">
+                <Image
+                  src="/images/logo/frandee-logo.jpg"
+                  alt="Frandee Geoscience"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
               <div>
                 <span className="text-lg font-bold font-display text-white tracking-tight">
@@ -141,7 +141,7 @@ export default function Navbar() {
                               </Link>
                             ))}
                             <div className="mt-2 pt-2 border-t border-geo-border/40 px-3 pb-2">
-                              <Link href="/services" className="text-xs text-geo-copper hover:text-copper-light transition-colors font-medium">
+                              <Link href="/services" className="text-xs text-geo-copper hover:text-geo-copper-light transition-colors font-medium">
                                 View all services →
                               </Link>
                             </div>
@@ -218,10 +218,13 @@ export default function Navbar() {
               {/* Mobile header */}
               <div className="flex items-center justify-between p-5 border-b border-geo-border/40">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-geo-copper to-geo-cyan flex items-center justify-center">
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                  <div className="relative w-8 h-8 rounded-lg overflow-hidden ring-1 ring-geo-copper/30">
+                    <Image
+                      src="/images/logo/frandee-logo.jpg"
+                      alt="Frandee Geoscience"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <span className="font-bold text-white font-display">Frandee Geo</span>
                 </Link>

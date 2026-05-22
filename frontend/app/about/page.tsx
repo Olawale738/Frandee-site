@@ -117,7 +117,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-geo-panel">
                 <Image
-                  src="https://images.unsplash.com/photo-1580745089289-6a1631c4e23c?w=800&q=80"
+                  src="/images/field-operations/field-03.jpg"
                   alt="Frandee Geoscience field team"
                   fill
                   className="object-cover"
