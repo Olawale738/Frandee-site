@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 };
 
 const openings = [
-  { id: 1, title: 'Senior Exploration Geologist', department: 'Geology', location: 'Lagos, Nigeria (Field)', type: 'Full-time', experience: '8+ years', description: 'Lead exploration geology programs across West Africa, managing field teams and integrating multi-source datasets for target generation.' },
-  { id: 2, title: 'Geophysicist (IP Surveys)', department: 'Geophysics', location: 'Lagos, Nigeria / Remote', type: 'Full-time', experience: '5+ years', description: 'Design, execute, and interpret induced polarization surveys for mineral exploration projects across Sub-Saharan Africa.' },
-  { id: 3, title: 'GIS Analyst', department: 'GIS & Remote Sensing', location: 'Lagos, Nigeria / Hybrid', type: 'Full-time', experience: '3+ years', description: 'Develop and maintain GIS databases, perform spatial analysis, and produce publication-quality geological maps for exploration projects.' },
-  { id: 4, title: 'Hydrogeologist', department: 'Hydrogeology', location: 'Lagos, Nigeria (Field)', type: 'Full-time', experience: '4+ years', description: 'Conduct hydrogeological investigations, aquifer testing, and groundwater modeling for mining, infrastructure, and humanitarian projects.' },
-  { id: 5, title: 'Environmental Scientist', department: 'Environmental', location: 'Lagos, Nigeria', type: 'Full-time', experience: '3+ years', description: 'Prepare EIA/ESIA reports, conduct environmental baseline surveys, and support regulatory compliance for mining and infrastructure clients.' },
-  { id: 6, title: 'Geoscience Graduate (Internship)', department: 'All Departments', location: 'Lagos, Nigeria', type: 'Internship', experience: 'Graduate level', description: 'A 6-month structured internship program for recent geology, geophysics, or environmental science graduates. Hands-on project exposure.' },
+  { id: 1, title: 'Senior Exploration Geologist', department: 'Geology', location: 'Yenagoa, Bayelsa (Field)', type: 'Full-time', experience: '8+ years', description: 'Lead exploration geology programs across West Africa, managing field teams and integrating multi-source datasets for target generation.' },
+  { id: 2, title: 'Geophysicist (IP Surveys)', department: 'Geophysics', location: 'Yenagoa, Bayelsa / Remote', type: 'Full-time', experience: '5+ years', description: 'Design, execute, and interpret induced polarization surveys for mineral exploration projects across Sub-Saharan Africa.' },
+  { id: 3, title: 'GIS Analyst', department: 'GIS & Remote Sensing', location: 'Yenagoa, Bayelsa / Hybrid', type: 'Full-time', experience: '3+ years', description: 'Develop and maintain GIS databases, perform spatial analysis, and produce publication-quality geological maps for exploration projects.' },
+  { id: 4, title: 'Hydrogeologist', department: 'Hydrogeology', location: 'Yenagoa, Bayelsa (Field)', type: 'Full-time', experience: '4+ years', description: 'Conduct hydrogeological investigations, aquifer testing, and groundwater modeling for mining, infrastructure, and humanitarian projects.' },
+  { id: 5, title: 'Environmental Scientist', department: 'Environmental', location: 'Yenagoa, Bayelsa', type: 'Full-time', experience: '3+ years', description: 'Prepare EIA/ESIA reports, conduct environmental baseline surveys, and support regulatory compliance for mining and infrastructure clients.' },
+  { id: 6, title: 'Geoscience Graduate (Internship)', department: 'All Departments', location: 'Yenagoa, Bayelsa', type: 'Internship', experience: 'Graduate level', description: 'A 6-month structured internship program for recent geology, geophysics, or environmental science graduates. Hands-on project exposure.' },
 ];
 
 const deptColors: Record<string, string> = {

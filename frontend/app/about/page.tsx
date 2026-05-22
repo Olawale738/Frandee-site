@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: '2010', title: 'Company Founded', description: 'Dr. Okonkwo establishes Frandee Geoscience in Lagos, Nigeria, with a vision to deliver world-class geoscience intelligence to African exploration.' },
+  { year: '2010', title: 'Company Founded', description: 'Dr. Okonkwo establishes Frandee Geoscience in Yenagoa, Bayelsa State, with a vision to deliver world-class geoscience intelligence to African exploration.' },
   { year: '2013', title: 'Regional Expansion', description: 'Expanded operations to 8 West African countries, completing 30+ exploration programs for junior and mid-tier mining companies.' },
   { year: '2016', title: 'GIS Technology Center', description: 'Launched dedicated GIS and remote sensing technology center, integrating machine learning for large-scale geological mapping.' },
   { year: '2019', title: 'Research Partnership', description: 'Established research partnerships with University of Lagos, University of Ghana, and University of Cape Town.' },

@@ -79,7 +79,7 @@ export default function ContactPage() {
                 {
                   icon: MapPin,
                   label: 'Office',
-                  value: '123 Geological Drive\nEarth Sciences Building\nLagos, Nigeria',
+                  value: 'Arietallin Street\nYenagoa 569101, Bayelsa\nNigeria',
                   color: 'copper',
                 },
                 {
@@ -92,9 +92,9 @@ export default function ContactPage() {
                 {
                   icon: Phone,
                   label: 'Phone',
-                  value: '+234 800 000 0000',
+                  value: '+234 906 729 8542',
                   color: 'emerald',
-                  href: 'tel:+2348000000000',
+                  href: 'tel:+2349067298542',
                 },
                 {
                   icon: Clock,
@@ -166,7 +166,7 @@ export default function ContactPage() {
 
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/2348000000000"
+                href="https://wa.me/2349067298542"
                 className="flex items-center gap-3 p-5 rounded-2xl bg-green-500/10 border border-green-500/20 hover:border-green-500/40 transition-all group"
               >
                 <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/30 transition-colors">

@@ -159,7 +159,7 @@ function autoReplyHtml(name: string) {
       <div class="highlight">
         <p>
           ⏱ <strong>Typical response time:</strong> within 24 hours<br />
-          📞 For urgent matters, please call us directly at <a href="tel:+2348000000000">+234 800 000 0000</a>
+          📞 For urgent matters, please call us directly at <a href="tel:+2349067298542">+234 906 729 8542</a>
         </p>
       </div>
 
@@ -174,7 +174,7 @@ function autoReplyHtml(name: string) {
 
     <div class="footer">
       <p>
-        Frandee Geoscience &nbsp;·&nbsp; Lagos, Nigeria<br />
+        Frandee Geoscience &nbsp;·&nbsp; Yenagoa, Bayelsa, Nigeria<br />
         <a href="mailto:contact@frandeeconsultingservices.com">contact@frandeeconsultingservices.com</a>
         &nbsp;·&nbsp;
         <a href="https://frandeeconsultingservices.com">frandeeconsultingservices.com</a>

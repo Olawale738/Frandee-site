@@ -116,7 +116,9 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-geo-copper mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-slate-400">
-                  Lagos, Nigeria
+                  Arietallin Street<br />
+                  Yenagoa 569101, Bayelsa<br />
+                  Nigeria
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -133,8 +135,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-geo-copper flex-shrink-0" />
-                <a href="tel:+2348000000000" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  +234 800 000 0000
+                <a href="tel:+2349067298542" className="text-sm text-slate-400 hover:text-white transition-colors">
+                  +234 906 729 8542
                 </a>
               </li>
             </ul>
