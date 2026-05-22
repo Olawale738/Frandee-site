@@ -1,7 +1,31 @@
-# Frandee Consulting Services — Production Web App
+# Frandee Geoscience — World-Class Geoscience Services Website
 
-A full‑stack, production‑grade web application for **Frandee Consulting Services**:
-exploration, geophysics, mineral consulting and field operations.
+A premium, ultra-modern full-stack geoscience company website for **Frandee Geoscience** — a full-stack geoscience services firm delivering geological exploration, geophysics, remote sensing, GIS, hydrogeology, and environmental services.
+
+## Tech Stack
+
+- **Frontend:** Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion
+- **UI:** Custom design system with geo color palette, dark mode, glass morphism
+- **Animations:** Framer Motion scroll-triggered reveals, animated counters, canvas topographic lines
+- **Backend:** Node.js + Express + TypeScript + Prisma (unchanged)
+
+## Pages
+
+| Page | Route |
+|------|-------|
+| Home | `/` |
+| About | `/about` |
+| Services | `/services` |
+| Projects | `/projects` |
+| Project Detail | `/projects/[slug]` |
+| Team | `/team` |
+| Training | `/training` |
+| Research | `/research` |
+| Contact | `/contact` |
+| Careers | `/careers` |
+| Blog | `/blog` |
+| Blog Post | `/blog/[slug]` |
+| 404 | auto |
 
 - **Frontend:** Next.js 14 (Pages Router) + TypeScript + Tailwind CSS
 - **Backend:** Node.js 20 + Express + TypeScript + Prisma
