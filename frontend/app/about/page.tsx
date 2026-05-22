@@ -12,18 +12,17 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: '2010', title: 'Company Founded', description: 'Dr. Okonkwo establishes Frandee Geoscience in Yenagoa, Bayelsa State, with a vision to deliver world-class geoscience intelligence to African exploration.' },
-  { year: '2013', title: 'Regional Expansion', description: 'Expanded operations to 8 West African countries, completing 30+ exploration programs for junior and mid-tier mining companies.' },
-  { year: '2016', title: 'GIS Technology Center', description: 'Launched dedicated GIS and remote sensing technology center, integrating machine learning for large-scale geological mapping.' },
-{ year: '2022', title: 'ISO Certification', description: 'Achieved ISO 9001:2015 certification for quality management systems across all geoscience service lines.' },
-  { year: '2024', title: '250+ Projects', description: 'Completed our 250th project milestone, spanning 22 countries and generating over 150 drill-ready targets.' },
+  { year: '2020', title: 'Consulting Practice Launched', description: 'Frandee Consulting Services was established in Yenagoa, Bayelsa State, bringing expert geoscience knowledge directly to clients across Nigeria.' },
+  { year: '2021', title: 'First Field Projects', description: 'Completed first independent geophysical and hydrogeological surveys, delivering actionable subsurface data to clients in the Niger Delta region.' },
+  { year: '2023', title: 'Publication Support Added', description: 'Expanded services to include academic writing support — manuscript editing, proofreading, and journal submission guidance for geoscience researchers.' },
+  { year: '2024', title: 'Training & Workshops', description: 'Delivered hands-on geoscience training workshops covering VES, ERT, and GIS techniques for students and early-career professionals.' },
 ];
 
 const capabilities = [
   { icon: Mountain, title: 'Field Operations', description: 'Expert field teams operating in remote, harsh environments across Sub-Saharan Africa.' },
   { icon: FlaskConical, title: 'Laboratory Analysis', description: 'Partner labs for geochemical, petrographic, and environmental sample analysis.' },
-  { icon: Globe, title: 'Multi-Country Reach', description: '22 countries served with licensed operations and strong regulatory relationships.' },
-  { icon: BookOpen, title: 'Research Excellence', description: '40+ peer-reviewed publications and active academic partnerships.' },
+  { icon: Globe, title: 'Nigeria-Based, Globally Trained', description: 'Delivering expert geoscience services across Nigeria with internationally trained expertise and methods.' },
+  { icon: BookOpen, title: 'Publication Support', description: 'Helping researchers and students get published — from manuscript editing to journal submission.' },
   { icon: Shield, title: 'Safety Standards', description: 'Zero-harm culture with comprehensive HSE management systems and field protocols.' },
   { icon: Zap, title: 'Technology Edge', description: 'Latest software, UAV platforms, and AI-assisted data processing workflows.' },
 ];
@@ -58,10 +57,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
-              { value: 15, suffix: '+', label: 'Years Experience' },
-              { value: 280, suffix: '+', label: 'Projects Completed' },
-              { value: 22, suffix: '', label: 'Countries Served' },
-              { value: 50, suffix: '+', label: 'Specialists' },
+              { value: 5, suffix: '+', label: 'Years Experience' },
+              { value: 20, suffix: '+', label: 'Projects Completed' },
+              { value: 3, suffix: '', label: 'States Served' },
+              { value: 10, suffix: '+', label: 'Clients Supported' },
             ].map((s) => (
               <div key={s.label}>
                 <div className="text-4xl font-bold font-mono text-white mb-1">

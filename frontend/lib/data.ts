@@ -203,10 +203,10 @@ export const PROJECTS = [
 ];
 
 export const STATS = [
-  { label: 'Projects Completed', value: 280, suffix: '+' },
-  { label: 'Countries Served', value: 22, suffix: '' },
-  { label: 'Drill Targets Generated', value: 150, suffix: '+' },
-  { label: 'Years of Excellence', value: 15, suffix: '' },
+  { label: 'Projects Completed', value: 20, suffix: '+' },
+  { label: 'States Served', value: 3, suffix: '' },
+  { label: 'Clients Supported', value: 10, suffix: '+' },
+  { label: 'Years of Excellence', value: 5, suffix: '' },
 ];
 
 export const TESTIMONIALS = [
