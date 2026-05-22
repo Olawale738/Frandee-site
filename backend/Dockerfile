@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1.7
 # ---------- deps ----------
 FROM node:20-alpine AS deps
+RUN apk add --no-cache openssl
 WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma
@@ -8,6 +9,7 @@ RUN npm install --no-audit --no-fund
 
 # ---------- build ----------
 FROM node:20-alpine AS build
+RUN apk add --no-cache openssl
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -16,9 +18,9 @@ RUN npm run build
 
 # ---------- runtime ----------
 FROM node:20-alpine AS runtime
+RUN apk add --no-cache openssl
 ENV NODE_ENV=production
 WORKDIR /app
-# install only prod deps
 COPY package*.json ./
 COPY prisma ./prisma
 RUN npm install --omit=dev --no-audit --no-fund && npx prisma generate
