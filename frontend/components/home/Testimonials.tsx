@@ -11,9 +11,9 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="section-padding relative bg-geo-black overflow-hidden">
-      <div className="absolute inset-0 geo-grid-bg opacity-30" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-geo-cyan/20 to-transparent" />
+    <section className="section-padding relative bg-slate-50 overflow-hidden">
+      <div className="absolute inset-0 geo-grid-bg opacity-15" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
@@ -21,6 +21,7 @@ export default function Testimonials() {
           title="Trusted By"
           titleHighlight="Industry Leaders"
           description="What our clients say about working with the Frandee Geoscience team."
+          tone="light"
           className="mb-14"
         />
 
@@ -34,14 +35,14 @@ export default function Testimonials() {
               transition={{ duration: 0.4 }}
               className="relative"
             >
-              <div className="glass-card rounded-2xl p-8 lg:p-10 text-center">
+              <div className="bg-white border border-slate-200 shadow-xl rounded-xl p-8 lg:p-10 text-center">
                 <Quote className="w-8 h-8 text-geo-cyan/30 mx-auto mb-6" />
                 <div className="flex justify-center gap-1 mb-6">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-geo-copper text-geo-copper" />
                   ))}
                 </div>
-                <p className="text-lg lg:text-xl text-slate-200 leading-relaxed italic mb-8">
+                <p className="text-lg lg:text-xl text-slate-700 leading-relaxed italic mb-8">
                   "{TESTIMONIALS[active].quote}"
                 </p>
                 <div className="flex items-center justify-center gap-4">
@@ -55,8 +56,8 @@ export default function Testimonials() {
                     />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-white">{TESTIMONIALS[active].author}</div>
-                    <div className="text-sm text-slate-400">{TESTIMONIALS[active].role}</div>
+                    <div className="font-semibold text-geo-dark">{TESTIMONIALS[active].author}</div>
+                    <div className="text-sm text-slate-500">{TESTIMONIALS[active].role}</div>
                   </div>
                 </div>
               </div>
@@ -67,7 +68,7 @@ export default function Testimonials() {
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={() => setActive((a) => (a === 0 ? TESTIMONIALS.length - 1 : a - 1))}
-              className="w-9 h-9 rounded-xl border border-geo-border/40 flex items-center justify-center text-slate-400 hover:text-white hover:border-geo-cyan/30 transition-all"
+              className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-geo-dark hover:border-geo-cyan/50 transition-all"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -77,14 +78,14 @@ export default function Testimonials() {
                   key={i}
                   onClick={() => setActive(i)}
                   className={`transition-all duration-300 rounded-full ${
-                    i === active ? 'w-6 h-2 bg-geo-cyan' : 'w-2 h-2 bg-slate-600 hover:bg-slate-400'
+                    i === active ? 'w-6 h-2 bg-geo-cyan' : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={() => setActive((a) => (a === TESTIMONIALS.length - 1 ? 0 : a + 1))}
-              className="w-9 h-9 rounded-xl border border-geo-border/40 flex items-center justify-center text-slate-400 hover:text-white hover:border-geo-cyan/30 transition-all"
+              className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-geo-dark hover:border-geo-cyan/50 transition-all"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

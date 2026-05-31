@@ -2,7 +2,17 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  MessageCircle,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from 'lucide-react';
 import GeoBackground from '@/components/shared/GeoBackground';
 
 const inquiryTypes = [
@@ -16,14 +26,40 @@ const inquiryTypes = [
   'Other',
 ];
 
+const directEmails = [
+  'dr.francis@frandeeconsultingservices.com',
+  'services@frandeeconsultingservices.com',
+];
+
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [form, setForm] = useState({
-    name: '', email: '', company: '', phone: '', inquiry: '', message: '',
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    inquiry: '',
+    message: '',
   });
+
+  const directMailHref = `mailto:${directEmails.join(',')}?subject=${encodeURIComponent(
+    `Project enquiry${form.inquiry ? ` - ${form.inquiry}` : ''}`
+  )}&body=${encodeURIComponent(
+    [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.company ? `Company: ${form.company}` : '',
+      form.phone ? `Phone: ${form.phone}` : '',
+      '',
+      form.message,
+    ]
+      .filter(Boolean)
+      .join('\n')
+  )}`;
+  const showDirectFallback = status === 'error' && errorMsg.toLowerCase().includes('email service');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -50,9 +86,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
-      {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+    <div className="bg-slate-50 min-h-screen pt-20">
+      <section className="relative py-20 lg:py-24 overflow-hidden bg-gradient-to-br from-geo-dark via-geo-black to-black">
         <GeoBackground />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -61,19 +96,17 @@ export default function ContactPage() {
             <div className="h-px w-8 bg-geo-cyan" />
           </div>
           <h1 className="text-5xl sm:text-6xl font-bold font-display text-white leading-tight mb-6">
-            Start a{' '}
-            <span className="text-gradient-cyan">Conversation</span>
+            Start a <span className="text-gradient-cyan">Conversation</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Tell us about your project. Our team will respond within 24 hours.
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+            Tell us about your project. Our technical team will respond within 24 hours.
           </p>
         </div>
       </section>
 
-      <section className="section-padding pt-0">
+      <section className="section-padding bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact info sidebar */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="space-y-5">
               {[
                 {
@@ -99,11 +132,11 @@ export default function ContactPage() {
                 {
                   icon: Clock,
                   label: 'Hours',
-                  value: 'Mon–Fri: 8am–6pm WAT\nEmergency support 24/7',
+                  value: 'Mon-Fri: 8am-6pm WAT\nEmergency support 24/7',
                   color: 'copper',
                 },
               ].map((item) => (
-                <div key={item.label} className="p-5 rounded-2xl glass-card flex gap-4">
+                <div key={item.label} className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm flex gap-4">
                   <div
                     className={`w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center ${
                       item.color === 'cyan'
@@ -128,75 +161,63 @@ export default function ContactPage() {
                       {item.label}
                     </div>
                     {item.href ? (
-                      <a
-                        href={item.href}
-                        className="text-sm text-slate-300 hover:text-white transition-colors"
-                      >
+                      <a href={item.href} className="text-sm text-slate-700 hover:text-geo-cyan transition-colors">
                         {item.value}
                       </a>
                     ) : (
-                      <div className="text-sm text-slate-300 whitespace-pre-line">{item.value}</div>
+                      <div className="text-sm text-slate-700 whitespace-pre-line">{item.value}</div>
                     )}
                   </div>
                 </div>
               ))}
 
-              {/* Direct email info */}
-              <div className="p-5 rounded-2xl glass-card border border-geo-copper/15">
+              <div className="p-5 rounded-xl bg-white border border-geo-cyan/20 shadow-sm">
                 <div className="text-[10px] font-mono tracking-widest text-geo-copper uppercase mb-3">
                   Direct Inboxes
                 </div>
                 <div className="space-y-2">
-                  <a
-                    href="mailto:dr.francis@frandeeconsultingservices.com"
-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-geo-copper flex-shrink-0" />
-                    dr.francis@frandeeconsulting<wbr />services.com
-                  </a>
-                  <a
-                    href="mailto:services@frandeeconsultingservices.com"
-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-geo-copper flex-shrink-0" />
-                    services@frandeeconsulting<wbr />services.com
-                  </a>
+                  {directEmails.map((email) => (
+                    <a
+                      key={email}
+                      href={`mailto:${email}`}
+                      className="flex items-center gap-2 text-sm text-slate-700 hover:text-geo-cyan transition-colors"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-geo-copper flex-shrink-0" />
+                      <span className="break-all">{email}</span>
+                    </a>
+                  ))}
                 </div>
               </div>
 
-              {/* WhatsApp CTA */}
               <a
                 href="https://wa.me/message/OTFG6GTCJ66PP1"
-                className="flex items-center gap-3 p-5 rounded-2xl bg-green-500/10 border border-green-500/20 hover:border-green-500/40 transition-all group"
+                className="flex items-center gap-3 p-5 rounded-xl bg-white border border-green-200 shadow-sm hover:border-green-400 transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/30 transition-colors">
-                  <MessageCircle className="w-5 h-5 text-green-400" />
+                <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+                  <MessageCircle className="w-5 h-5 text-green-500" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-green-400">Chat on WhatsApp</div>
-                  <div className="text-xs text-slate-400">Quick response for urgent queries</div>
+                  <div className="text-sm font-semibold text-green-600">Chat on WhatsApp</div>
+                  <div className="text-xs text-slate-500">Quick response for urgent queries</div>
                 </div>
               </a>
             </div>
 
-            {/* Form */}
             <div className="lg:col-span-2">
               {status === 'success' ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="h-full flex items-center justify-center min-h-[500px]"
+                  className="h-full flex items-center justify-center min-h-[500px] bg-white border border-slate-200 rounded-xl shadow-sm"
                 >
                   <div className="text-center p-12">
                     <div className="w-16 h-16 rounded-full bg-geo-emerald/10 flex items-center justify-center mx-auto mb-5">
                       <CheckCircle className="w-8 h-8 text-geo-emerald" />
                     </div>
-                    <h3 className="text-2xl font-bold font-display text-white mb-2">Message Sent!</h3>
-                    <p className="text-slate-400 mb-2">
-                      Your enquiry has been delivered to our team.
-                    </p>
+                    <h3 className="text-2xl font-bold font-display text-geo-dark mb-2">Message Sent!</h3>
+                    <p className="text-slate-600 mb-2">Your enquiry has been delivered to our team.</p>
                     <p className="text-sm text-slate-500">
-                      Check your inbox — we've sent you a confirmation. We'll reply within 24 hours.
+                      Check your inbox. We have sent you a confirmation and will reply within 24 hours.
                     </p>
                     <button
                       onClick={() => {
@@ -210,15 +231,27 @@ export default function ContactPage() {
                   </div>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="p-8 rounded-2xl glass-card space-y-5" noValidate>
+                <form onSubmit={handleSubmit} className="p-8 rounded-xl bg-white border border-slate-200 shadow-xl space-y-5" noValidate>
                   <div className="text-[10px] font-mono text-geo-cyan tracking-widest uppercase">
                     Project Inquiry Form
                   </div>
 
                   {status === 'error' && (
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                      {errorMsg}
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                        <span>{errorMsg}</span>
+                      </div>
+                      {showDirectFallback && (
+                        <div className="mt-4 flex flex-wrap gap-3">
+                          <a href={directMailHref} className="btn-primary text-xs px-4 py-2">
+                            Email Directly
+                          </a>
+                          <a href="https://wa.me/message/OTFG6GTCJ66PP1" className="btn-secondary text-xs px-4 py-2">
+                            WhatsApp
+                          </a>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -232,7 +265,7 @@ export default function ContactPage() {
                       ] as const
                     ).map((field) => (
                       <div key={field.name}>
-                        <label htmlFor={field.name} className="block text-xs text-slate-400 mb-1.5">
+                        <label htmlFor={field.name} className="block text-xs text-slate-600 mb-1.5">
                           {field.label}
                         </label>
                         <input
@@ -244,14 +277,14 @@ export default function ContactPage() {
                           value={(form as any)[field.name]}
                           onChange={handleChange}
                           disabled={status === 'loading'}
-                          className="w-full px-4 py-3 rounded-xl bg-geo-panel border border-geo-border/40 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-geo-cyan/50 focus:ring-1 focus:ring-geo-cyan/20 transition-all disabled:opacity-50"
+                          className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-geo-cyan focus:ring-2 focus:ring-geo-cyan/15 transition-all disabled:opacity-50"
                         />
                       </div>
                     ))}
                   </div>
 
                   <div>
-                    <label htmlFor="inquiry" className="block text-xs text-slate-400 mb-1.5">
+                    <label htmlFor="inquiry" className="block text-xs text-slate-600 mb-1.5">
                       Service Inquiry *
                     </label>
                     <select
@@ -261,7 +294,7 @@ export default function ContactPage() {
                       value={form.inquiry}
                       onChange={handleChange}
                       disabled={status === 'loading'}
-                      className="w-full px-4 py-3 rounded-xl bg-geo-panel border border-geo-border/40 text-white text-sm focus:outline-none focus:border-geo-cyan/50 focus:ring-1 focus:ring-geo-cyan/20 transition-all disabled:opacity-50"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 text-sm focus:outline-none focus:border-geo-cyan focus:ring-2 focus:ring-geo-cyan/15 transition-all disabled:opacity-50"
                     >
                       <option value="">Select inquiry type</option>
                       {inquiryTypes.map((t) => (
@@ -273,7 +306,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-xs text-slate-400 mb-1.5">
+                    <label htmlFor="message" className="block text-xs text-slate-600 mb-1.5">
                       Project Description *
                     </label>
                     <textarea
@@ -281,11 +314,11 @@ export default function ContactPage() {
                       name="message"
                       required
                       rows={6}
-                      placeholder="Tell us about your project — location, scope, objectives, timeline..."
+                      placeholder="Tell us about your project: location, scope, objectives, timeline..."
                       value={form.message}
                       onChange={handleChange}
                       disabled={status === 'loading'}
-                      className="w-full px-4 py-3 rounded-xl bg-geo-panel border border-geo-border/40 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-geo-cyan/50 focus:ring-1 focus:ring-geo-cyan/20 transition-all resize-none disabled:opacity-50"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-geo-cyan focus:ring-2 focus:ring-geo-cyan/15 transition-all resize-none disabled:opacity-50"
                     />
                   </div>
 
@@ -297,7 +330,7 @@ export default function ContactPage() {
                     {status === 'loading' ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Sending…
+                        Sending...
                       </>
                     ) : (
                       <>
@@ -309,9 +342,9 @@ export default function ContactPage() {
 
                   <p className="text-xs text-slate-500 text-center">
                     Your message is sent directly to{' '}
-                    <span className="text-slate-400">dr.francis@frandeeconsultingservices.com</span>
+                    <span className="text-slate-600">dr.francis@frandeeconsultingservices.com</span>
                     {' '}and{' '}
-                    <span className="text-slate-400">services@frandeeconsultingservices.com</span>
+                    <span className="text-slate-600">services@frandeeconsultingservices.com</span>
                   </p>
                 </form>
               )}

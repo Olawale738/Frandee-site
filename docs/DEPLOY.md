@@ -40,11 +40,19 @@ local Docker to a live, secure, monitored deployment.
 
 ### Frontend (Vercel)
 
-| Variable                  | Example                                      |
-|---------------------------|----------------------------------------------|
-| `NEXT_PUBLIC_API_URL`     | `https://api.frandeeconsult.com/api`         |
-| `NEXT_PUBLIC_SITE_URL`    | `https://www.frandeeconsult.com`             |
-| `NEXT_PUBLIC_SENTRY_DSN`  | Sentry frontend DSN                          |
+The active contact form is implemented in the Next.js app at `/api/contact`, so these SMTP variables must be configured on the Vercel project too.
+
+| Variable                  | Example                                                                                       |
+|---------------------------|-----------------------------------------------------------------------------------------------|
+| `NEXT_PUBLIC_API_URL`     | `https://api.frandeeconsult.com/api`                                                          |
+| `NEXT_PUBLIC_SITE_URL`    | `https://www.frandeeconsultingservices.com`                                                    |
+| `NEXT_PUBLIC_SENTRY_DSN`  | Sentry frontend DSN                                                                           |
+| `SMTP_HOST`               | `mail.frandeeconsultingservices.com`                                                          |
+| `SMTP_PORT`               | `587`                                                                                         |
+| `SMTP_SECURE`             | `false`                                                                                       |
+| `SMTP_USER`               | `services@frandeeconsultingservices.com`                                                      |
+| `SMTP_PASS`               | mailbox password                                                                              |
+| `CONTACT_TO`              | `dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com`             |
 
 ## 3. Database setup (Supabase)
 

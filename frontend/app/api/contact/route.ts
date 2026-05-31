@@ -288,7 +288,10 @@ export async function POST(req: NextRequest) {
     if (!mailConfig.ok) {
       console.error('[contact API] SMTP is not configured', { missing: mailConfig.missing });
       return NextResponse.json(
-        { error: 'Email service is not configured yet. Please email us directly.' },
+        {
+          error:
+            'The website email service is not connected yet. Please email dr.francis@frandeeconsultingservices.com or services@frandeeconsultingservices.com directly while we finish setup.',
+        },
         { status: 503 }
       );
     }
