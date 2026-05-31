@@ -35,7 +35,7 @@ local Docker to a live, secure, monitored deployment.
 | `SMTP_PORT`        | `587`                                                                                |                                  |
 | `SMTP_USER`        | account / API key                                                                    |                                  |
 | `SMTP_PASS`        | password / API token                                                                 | Store as a secret.               |
-| `CONTACT_TO`       | `info@frandeeconsult.com`                                                            | Inbox that receives submissions. |
+| `CONTACT_TO`       | `dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com`    | Inboxes that receive submissions. |
 | `SENTRY_DSN`       | Sentry project DSN                                                                   | Optional.                        |
 
 ### Frontend (Vercel)

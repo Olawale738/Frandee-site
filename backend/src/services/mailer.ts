@@ -25,7 +25,9 @@ export interface ContactMail {
 }
 
 export async function sendContactEmail(payload: ContactMail) {
-  const to = process.env.CONTACT_TO ?? 'info@frandeeconsult.com';
+  const to =
+    process.env.CONTACT_TO ??
+    'dr.francis@frandeeconsultingservices.com, services@frandeeconsultingservices.com';
   const t = getTransporter();
   const subject = `[Frandee Contact] ${payload.subject ?? 'New enquiry'} — ${payload.name}`;
   const text = `From: ${payload.name} <${payload.email}>\n\n${payload.message}`;

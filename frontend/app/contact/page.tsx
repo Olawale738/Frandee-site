@@ -85,9 +85,9 @@ export default function ContactPage() {
                 {
                   icon: Mail,
                   label: 'Email',
-                  value: 'contact@frandeeconsultingservices.com',
+                  value: 'services@frandeeconsultingservices.com',
                   color: 'cyan',
-                  href: 'mailto:contact@frandeeconsultingservices.com',
+                  href: 'mailto:services@frandeeconsultingservices.com',
                 },
                 {
                   icon: Phone,
@@ -155,11 +155,11 @@ export default function ContactPage() {
                     dr.francis@frandeeconsulting<wbr />services.com
                   </a>
                   <a
-                    href="mailto:contact@frandeeconsultingservices.com"
+                    href="mailto:services@frandeeconsultingservices.com"
                     className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors"
                   >
                     <Mail className="w-3.5 h-3.5 text-geo-copper flex-shrink-0" />
-                    contact@frandeeconsulting<wbr />services.com
+                    services@frandeeconsulting<wbr />services.com
                   </a>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export default function ContactPage() {
                     Your message is sent directly to{' '}
                     <span className="text-slate-400">dr.francis@frandeeconsultingservices.com</span>
                     {' '}and{' '}
-                    <span className="text-slate-400">contact@frandeeconsultingservices.com</span>
+                    <span className="text-slate-400">services@frandeeconsultingservices.com</span>
                   </p>
                 </form>
               )}

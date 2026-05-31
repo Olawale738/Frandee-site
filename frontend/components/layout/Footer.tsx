@@ -130,8 +130,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-geo-copper flex-shrink-0" />
-                <a href="mailto:contact@frandeeconsultingservices.com" className="text-sm text-slate-400 hover:text-white transition-colors break-all">
-                  contact@frandeeconsultingservices.com
+                <a href="mailto:services@frandeeconsultingservices.com" className="text-sm text-slate-400 hover:text-white transition-colors break-all">
+                  services@frandeeconsultingservices.com
                 </a>
               </li>
               <li className="flex items-center gap-3">

@@ -237,7 +237,7 @@ npm run dev    # starts at http://localhost:3000
 | `SMTP_PORT`     | no       | `587`                                       | `465` enables TLS automatically.                                     |
 | `SMTP_USER`     | no       | API key or email                            |                                                                      |
 | `SMTP_PASS`     | no       | API secret or password                      | **Use a secret store; never commit.**                                |
-| `CONTACT_TO`    | no       | `info@frandeeconsult.com`                   | Inbox that receives form submissions.                                |
+| `CONTACT_TO`    | no       | `dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com` | Inboxes that receive form submissions.                               |
 | `SENTRY_DSN`    | no       | `https://abc@o123.ingest.sentry.io/456`     | Enables backend error reporting if set.                              |
 
 ### 5.2 Frontend (`frontend/.env.local`)
@@ -417,7 +417,7 @@ git push origin main
    - `FRONTEND_URL` = your Vercel URL (set after §7.4) — for now use `*` temporarily, but tighten it before going live.
    - `NODE_ENV` = `production`
    - `FORCE_HTTPS` = `true`
-   - `CONTACT_TO` = `info@frandeeconsult.com`
+   - `CONTACT_TO` = `dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com`
 6. Click **Create Web Service**. First boot takes 2–5 minutes.
 
 After it's up:
@@ -510,7 +510,7 @@ SMTP_HOST=smtp.resend.com
 SMTP_PORT=587
 SMTP_USER=resend     # literal string
 SMTP_PASS=re_xxxxxx  # your API key
-CONTACT_TO=info@frandeeconsult.com
+CONTACT_TO=dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com
 ```
 
 Or Gmail (less recommended — requires app passwords and has low daily limits):

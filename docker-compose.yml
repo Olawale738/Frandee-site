@@ -38,7 +38,7 @@ services:
       SMTP_PORT: "587"
       SMTP_USER: ""
       SMTP_PASS: ""
-      CONTACT_TO: "info@frandeeconsult.com"
+      CONTACT_TO: "dr.francis@frandeeconsultingservices.com,services@frandeeconsultingservices.com"
       SENTRY_DSN: ""
     ports:
       - "4000:4000"
