@@ -29,10 +29,11 @@ const capabilities = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
-      <section className="relative py-20 lg:py-28 overflow-hidden">
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-6">
@@ -45,7 +46,7 @@ export default function AboutPage() {
               <br />
               Excellence
             </h1>
-            <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
+            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
               Since 2010, Frandee Geoscience has been delivering premium geoscience intelligence to exploration companies, governments, research institutions, and mining organizations across Africa and beyond.
             </p>
           </div>
@@ -53,7 +54,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats banner */}
-      <section className="py-12 border-y border-geo-border/30 bg-geo-dark/50">
+      <section className="py-12 border-y border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
@@ -63,10 +64,10 @@ export default function AboutPage() {
               { value: 10, suffix: '+', label: 'Clients Supported' },
             ].map((s) => (
               <div key={s.label}>
-                <div className="text-4xl font-bold font-mono text-white mb-1">
+                <div className="text-4xl font-bold font-mono text-geo-dark mb-1">
                   <AnimatedCounter value={s.value} suffix={s.suffix} />
                 </div>
-                <div className="text-sm text-slate-400">{s.label}</div>
+                <div className="text-sm text-slate-600">{s.label}</div>
               </div>
             ))}
           </div>
@@ -84,18 +85,19 @@ export default function AboutPage() {
                 title="Why We"
                 titleHighlight="Exist"
                 align="left"
+                tone="light"
                 className="mb-8"
               />
               <div className="space-y-6">
                 <div className="p-6 rounded-2xl glass-card border-l-2 border-l-geo-cyan">
                   <div className="text-xs font-mono tracking-widest text-geo-cyan uppercase mb-2">Our Mission</div>
-                  <p className="text-slate-300 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     To deliver technically excellent, scientifically rigorous geoscience services that help our clients make better exploration and development decisions — faster, with greater confidence, and at lower risk.
                   </p>
                 </div>
                 <div className="p-6 rounded-2xl glass-card border-l-2 border-l-geo-copper">
                   <div className="text-xs font-mono tracking-widest text-geo-copper uppercase mb-2">Our Vision</div>
-                  <p className="text-slate-300 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     To be Africa's most trusted and technically capable full-stack geoscience company — the partner of choice for governments, mining companies, universities, and international organizations.
                   </p>
                 </div>
@@ -103,7 +105,7 @@ export default function AboutPage() {
                   <div className="text-xs font-mono tracking-widest text-geo-emerald uppercase mb-2">Our Values</div>
                   <div className="grid grid-cols-2 gap-2 mt-2">
                     {['Scientific Rigor', 'Technical Excellence', 'Client Partnership', 'Safety First', 'Innovation', 'Integrity'].map((v) => (
-                      <div key={v} className="flex items-center gap-2 text-sm text-slate-400">
+                      <div key={v} className="flex items-center gap-2 text-sm text-slate-600">
                         <div className="w-1.5 h-1.5 rounded-full bg-geo-emerald flex-shrink-0" />
                         {v}
                       </div>
@@ -128,7 +130,7 @@ export default function AboutPage() {
                 <div className="text-xs font-mono text-geo-cyan mb-1">ISO 9001:2015</div>
                 <div className="flex items-center gap-2">
                   <Award className="w-4 h-4 text-geo-copper" />
-                  <span className="text-sm font-semibold text-white">Quality Certified</span>
+                  <span className="text-sm font-semibold text-geo-dark">Quality Certified</span>
                 </div>
               </div>
             </div>
@@ -137,7 +139,7 @@ export default function AboutPage() {
       </section>
 
       {/* Capabilities */}
-      <section className="section-padding bg-geo-dark relative overflow-hidden">
+      <section className="section-padding bg-white relative overflow-hidden">
         <GeoBackground className="opacity-50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -145,6 +147,7 @@ export default function AboutPage() {
             title="What Sets Us"
             titleHighlight="Apart"
             description="A combination of deep technical expertise, modern technology, and operational capability that few geoscience firms can match."
+            tone="light"
             className="mb-14"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -153,8 +156,8 @@ export default function AboutPage() {
                 <div className="w-10 h-10 rounded-xl bg-geo-cyan/10 flex items-center justify-center mb-4">
                   <cap.icon className="w-5 h-5 text-geo-cyan" />
                 </div>
-                <h3 className="font-semibold text-white mb-2">{cap.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{cap.description}</p>
+                <h3 className="font-semibold text-geo-dark mb-2">{cap.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{cap.description}</p>
               </div>
             ))}
           </div>
@@ -168,6 +171,7 @@ export default function AboutPage() {
             eyebrow="Company History"
             title="Our"
             titleHighlight="Journey"
+            tone="light"
             className="mb-16"
           />
           <div className="relative">
@@ -179,8 +183,8 @@ export default function AboutPage() {
                   <div className="w-full lg:w-5/12">
                     <div className={`p-6 rounded-2xl glass-card hover:border-geo-cyan/20 transition-all ${i % 2 === 1 ? 'lg:text-right' : ''}`}>
                       <div className="text-xs font-mono text-geo-copper mb-2">{m.year}</div>
-                      <h3 className="font-bold font-display text-white text-lg mb-2">{m.title}</h3>
-                      <p className="text-sm text-slate-400 leading-relaxed">{m.description}</p>
+                      <h3 className="font-bold font-display text-geo-dark text-lg mb-2">{m.title}</h3>
+                      <p className="text-sm text-slate-600 leading-relaxed">{m.description}</p>
                     </div>
                   </div>
                   {/* Center dot */}

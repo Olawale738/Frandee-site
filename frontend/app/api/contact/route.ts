@@ -39,6 +39,38 @@ function getRecipientAddresses() {
   );
 }
 
+async function sendViaFormSubmit(data: ContactData) {
+  const [primary, ...cc] = getRecipientAddresses();
+  const body = new URLSearchParams({
+    name: data.name,
+    email: data.email,
+    company: data.company,
+    phone: data.phone,
+    inquiry: data.inquiry,
+    message: textBody(data),
+    _subject: `[Frandee] New Enquiry${data.inquiry ? ` - ${cleanHeader(data.inquiry)}` : ''} from ${cleanHeader(data.name)}`,
+    _template: 'table',
+    _captcha: 'false',
+  });
+
+  if (cc.length > 0) {
+    body.set('_cc', cc.join(','));
+  }
+
+  const response = await fetch(`https://formsubmit.co/ajax/${primary}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body,
+  });
+
+  if (!response.ok) {
+    throw new Error(`FormSubmit fallback failed with ${response.status}`);
+  }
+}
+
 function getMailConfig(): { ok: true; config: MailConfig } | { ok: false; missing: string[] } {
   const missing = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'].filter((key) => !process.env[key]);
   if (missing.length > 0) {
@@ -287,13 +319,19 @@ export async function POST(req: NextRequest) {
     const mailConfig = getMailConfig();
     if (!mailConfig.ok) {
       console.error('[contact API] SMTP is not configured', { missing: mailConfig.missing });
-      return NextResponse.json(
-        {
-          error:
-            'The website email service is not connected yet. Please email dr.francis@frandeeconsultingservices.com or services@frandeeconsultingservices.com directly while we finish setup.',
-        },
-        { status: 503 }
-      );
+      try {
+        await sendViaFormSubmit(data);
+        return NextResponse.json({ success: true, fallback: true });
+      } catch (fallbackError) {
+        console.error('[contact API] fallback mail failed', fallbackError);
+        return NextResponse.json(
+          {
+            error:
+              'The website email service is not connected yet. Please email dr.francis@frandeeconsultingservices.com or services@frandeeconsultingservices.com directly while we finish setup.',
+          },
+          { status: 503 }
+        );
+      }
     }
 
     const transporter = buildTransporter(mailConfig.config);

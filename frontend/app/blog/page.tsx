@@ -93,10 +93,11 @@ export default function BlogPage() {
   const rest = posts.filter((p) => !p.featured);
 
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+      <section className="relative py-20 lg:py-24 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="h-px w-8 bg-geo-cyan" />
@@ -107,7 +108,7 @@ export default function BlogPage() {
             Geoscience{' '}
             <span className="text-gradient-cyan">Insights</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             Technical articles, exploration guides, and industry perspectives from our team of geoscience experts.
           </p>
         </div>
@@ -146,10 +147,10 @@ export default function BlogPage() {
                     <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {post.date}</span>
                     <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
                   </div>
-                  <h3 className="text-xl font-bold font-display text-white mb-2 group-hover:text-geo-cyan transition-colors leading-tight">
+                  <h3 className="text-xl font-bold font-display text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors leading-tight">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">{post.excerpt}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4">{post.excerpt}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-slate-500">By {post.author}</span>
                     <span className="text-xs text-geo-copper group-hover:text-geo-copper-light flex items-center gap-1 transition-colors">
@@ -166,6 +167,7 @@ export default function BlogPage() {
             title="More"
             titleHighlight="Insights"
             align="left"
+            tone="light"
             className="mb-8"
           />
 
@@ -195,7 +197,7 @@ export default function BlogPage() {
                   <div className="text-[10px] text-slate-500 mb-2 flex items-center gap-1">
                     <Clock className="w-2.5 h-2.5" /> {post.readTime}
                   </div>
-                  <h3 className="text-sm font-semibold text-white mb-2 group-hover:text-geo-cyan transition-colors leading-tight line-clamp-2">
+                  <h3 className="text-sm font-semibold text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors leading-tight line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-xs text-slate-500">{post.author}</p>

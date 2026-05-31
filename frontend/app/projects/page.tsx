@@ -28,10 +28,11 @@ export default function ProjectsPage() {
     : PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+      <section className="relative py-20 lg:py-24 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="h-px w-8 bg-geo-cyan" />
@@ -42,14 +43,14 @@ export default function ProjectsPage() {
             Our{' '}
             <span className="text-gradient-copper">Projects</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             A portfolio of geoscience projects spanning mineral exploration, hydrogeology, environmental assessment, and research across Africa.
           </p>
         </div>
       </section>
 
       {/* Filter */}
-      <section className="py-6 border-y border-geo-border/30 bg-geo-dark/50 sticky top-16 lg:top-20 z-30 backdrop-blur-xl">
+      <section className="py-6 border-y border-slate-200 bg-white/95 sticky top-16 lg:top-20 z-30 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
             <Filter className="w-4 h-4 text-slate-500 flex-shrink-0" />
@@ -60,7 +61,7 @@ export default function ProjectsPage() {
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 flex-shrink-0 ${
                   activeCategory === cat
                     ? 'bg-geo-cyan text-geo-black font-semibold'
-                    : 'bg-geo-panel border border-geo-border/40 text-slate-400 hover:text-white hover:border-geo-cyan/20'
+                    : 'bg-slate-50 border border-slate-200 text-slate-600 hover:text-geo-dark hover:border-geo-cyan/30'
                 }`}
               >
                 {cat}
@@ -120,22 +121,22 @@ export default function ProjectsPage() {
                         <span>·</span>
                         <span>{project.year}</span>
                       </div>
-                      <h3 className="font-bold font-display text-white text-base mb-2 group-hover:text-geo-cyan transition-colors leading-tight">
+                      <h3 className="font-bold font-display text-geo-dark text-base mb-2 group-hover:text-geo-cyan transition-colors leading-tight">
                         {project.title}
                       </h3>
-                      <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-2">
+                      <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
                         {project.description}
                       </p>
 
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-1.5 mb-4">
                         {project.technologies.slice(0, 3).map((tech) => (
-                          <span key={tech} className="px-2 py-0.5 rounded bg-geo-panel border border-geo-border/30 text-[10px] text-slate-500">
+                          <span key={tech} className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-[10px] text-slate-500">
                             {tech}
                           </span>
                         ))}
                         {project.technologies.length > 3 && (
-                          <span className="px-2 py-0.5 rounded bg-geo-panel border border-geo-border/30 text-[10px] text-slate-500">
+                          <span className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-[10px] text-slate-500">
                             +{project.technologies.length - 3}
                           </span>
                         )}

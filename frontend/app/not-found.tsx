@@ -3,7 +3,7 @@ import { ArrowLeft, MapPin, Layers } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-geo-black flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 geo-grid-bg" />
       <div className="absolute inset-0 topo-bg opacity-20" />
@@ -11,19 +11,19 @@ export default function NotFound() {
 
       <div className="relative text-center px-4 max-w-xl mx-auto">
         {/* Icon */}
-        <div className="w-20 h-20 rounded-2xl bg-geo-panel border border-geo-border/40 flex items-center justify-center mx-auto mb-6">
+      <div className="w-20 h-20 rounded-2xl bg-white border border-slate-200 shadow-lg flex items-center justify-center mx-auto mb-6">
           <MapPin className="w-10 h-10 text-geo-copper" />
         </div>
 
         {/* 404 */}
-        <div className="text-[120px] font-black font-mono text-geo-black leading-none relative">
+        <div className="text-[120px] font-black font-mono text-geo-dark leading-none relative">
           <span className="relative z-10 text-transparent" style={{ WebkitTextStroke: '1px rgba(6,182,212,0.2)' }}>404</span>
         </div>
 
-        <h1 className="text-3xl font-bold font-display text-white mb-3 -mt-4">
+        <h1 className="text-3xl font-bold font-display text-geo-dark mb-3 -mt-4">
           Location Not Found
         </h1>
-        <p className="text-slate-400 mb-3">
+        <p className="text-slate-600 mb-3">
           The coordinates you're looking for don't exist on our map. This geological feature may have been moved, renamed, or never existed.
         </p>
         <p className="text-sm font-mono text-geo-cyan/50 mb-8">

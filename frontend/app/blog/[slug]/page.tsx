@@ -26,7 +26,7 @@ export default function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero image */}
       <div className="relative h-[50vh] min-h-[300px] bg-geo-panel">
         <Image src={post.image} alt={post.title} fill className="object-cover" priority sizes="100vw" />
@@ -34,7 +34,7 @@ export default function BlogPostPage({ params }: Props) {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-8">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-geo-dark transition-colors mb-8">
           <ArrowLeft className="w-4 h-4" /> Back to Blog
         </Link>
 
@@ -45,18 +45,18 @@ export default function BlogPostPage({ params }: Props) {
           <span className="text-xs text-slate-500 flex items-center gap-1"><User className="w-3 h-3" /> {post.author}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-bold font-display text-white leading-tight mb-8">{post.title}</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold font-display text-geo-dark leading-tight mb-8">{post.title}</h1>
 
-        <div className="prose prose-invert max-w-none">
+        <div className="prose max-w-none">
           {post.content.split('\n\n').map((para, i) => (
-            <p key={i} className="text-slate-300 leading-relaxed mb-5 text-lg">{para}</p>
+            <p key={i} className="text-slate-600 leading-relaxed mb-5 text-lg">{para}</p>
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-geo-border/30 flex items-center justify-between flex-wrap gap-4">
+        <div className="mt-12 pt-8 border-t border-slate-200 flex items-center justify-between flex-wrap gap-4">
           <div>
-            <p className="text-sm text-slate-400">Written by</p>
-            <p className="font-semibold text-white">{post.author}</p>
+            <p className="text-sm text-slate-500">Written by</p>
+            <p className="font-semibold text-geo-dark">{post.author}</p>
           </div>
           <Link href="/blog" className="btn-secondary text-sm">More Articles</Link>
         </div>

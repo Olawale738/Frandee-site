@@ -36,10 +36,11 @@ const perks = [
 
 export default function CareersPage() {
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+      <section className="relative py-20 lg:py-24 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="h-px w-8 bg-geo-cyan" />
@@ -50,14 +51,14 @@ export default function CareersPage() {
             Build Your Career in{' '}
             <span className="text-gradient-cyan">Geoscience</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             Join a world-class team of geoscientists delivering high-impact exploration and environmental programs across Africa.
           </p>
         </div>
       </section>
 
       {/* Why join */}
-      <section className="py-16 bg-geo-dark/50 border-y border-geo-border/30">
+      <section className="py-16 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {perks.map((perk) => (
@@ -65,8 +66,8 @@ export default function CareersPage() {
                 <div className="w-12 h-12 rounded-xl bg-geo-cyan/10 flex items-center justify-center mx-auto mb-3">
                   <perk.icon className="w-5 h-5 text-geo-cyan" />
                 </div>
-                <h3 className="font-semibold text-white mb-1">{perk.title}</h3>
-                <p className="text-sm text-slate-400">{perk.description}</p>
+                <h3 className="font-semibold text-geo-dark mb-1">{perk.title}</h3>
+                <p className="text-sm text-slate-600">{perk.description}</p>
               </div>
             ))}
           </div>
@@ -81,6 +82,7 @@ export default function CareersPage() {
             title="Current"
             titleHighlight="Openings"
             align="left"
+            tone="light"
             className="mb-10"
           />
 
@@ -93,12 +95,12 @@ export default function CareersPage() {
                       <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${deptColors[job.department] || ''}`}>
                         {job.department}
                       </span>
-                      <span className="text-[10px] font-mono text-slate-500 border border-geo-border/30 bg-geo-panel px-2.5 py-0.5 rounded-full">
+                      <span className="text-[10px] font-mono text-slate-500 border border-slate-200 bg-slate-50 px-2.5 py-0.5 rounded-full">
                         {job.type}
                       </span>
                     </div>
-                    <h3 className="text-lg font-bold font-display text-white mb-2 group-hover:text-geo-cyan transition-colors">{job.title}</h3>
-                    <p className="text-sm text-slate-400 leading-relaxed mb-3">{job.description}</p>
+                    <h3 className="text-lg font-bold font-display text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors">{job.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mb-3">{job.description}</p>
                     <div className="flex flex-wrap gap-4 text-xs text-slate-500">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-geo-copper" />
@@ -123,8 +125,8 @@ export default function CareersPage() {
 
           {/* Speculative application */}
           <div className="mt-10 p-8 rounded-2xl bg-gradient-to-br from-geo-copper/5 to-transparent border border-geo-copper/10 text-center">
-            <h3 className="text-xl font-bold font-display text-white mb-3">Don't See Your Role?</h3>
-            <p className="text-slate-400 mb-6 max-w-xl mx-auto">We're always interested in talented geoscientists. Send us your CV and we'll be in touch when the right opportunity arises.</p>
+            <h3 className="text-xl font-bold font-display text-geo-dark mb-3">Don't See Your Role?</h3>
+            <p className="text-slate-600 mb-6 max-w-xl mx-auto">We're always interested in talented geoscientists. Send us your CV and we'll be in touch when the right opportunity arises.</p>
             <Link href="/contact" className="btn-copper inline-flex">
               Send Speculative Application <ArrowRight className="w-4 h-4" />
             </Link>

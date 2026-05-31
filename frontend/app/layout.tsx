@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://frandeeconsultingservices.com'),
   title: {
     default: 'Frandee Geoscience | Engineering & Geoscience Consulting',
     template: '%s | Frandee Geoscience',
@@ -72,7 +73,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className="bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
         <div className="relative">
           <div

@@ -111,10 +111,11 @@ const colorMap = {
 
 export default function TrainingPage() {
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+      <section className="relative py-20 lg:py-24 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="h-px w-8 bg-geo-cyan" />
@@ -125,14 +126,14 @@ export default function TrainingPage() {
             Professional{' '}
             <span className="text-gradient-cyan">Training</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Practical, industry-relevant geoscience training programs designed to upskill professionals, teams, and organizations.
           </p>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-10 border-y border-geo-border/30 bg-geo-dark/50">
+      <section className="py-10 border-y border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
@@ -142,8 +143,8 @@ export default function TrainingPage() {
               { value: '98%', label: 'Satisfaction Rate' },
             ].map((s) => (
               <div key={s.label}>
-                <div className="text-3xl font-bold font-mono text-white mb-1">{s.value}</div>
-                <div className="text-sm text-slate-400">{s.label}</div>
+                <div className="text-3xl font-bold font-mono text-geo-dark mb-1">{s.value}</div>
+                <div className="text-sm text-slate-600">{s.label}</div>
               </div>
             ))}
           </div>
@@ -158,6 +159,7 @@ export default function TrainingPage() {
             title="Training"
             titleHighlight="Courses"
             description="From intensive field courses to online workshops — practical geoscience training that translates directly to better work."
+            tone="light"
             className="mb-14"
           />
 
@@ -177,19 +179,19 @@ export default function TrainingPage() {
                     </div>
                     <div className="text-right">
                       <div className="text-[10px] text-slate-500 font-mono">Duration</div>
-                      <div className="text-sm font-bold text-white">{course.duration}</div>
+                      <div className="text-sm font-bold text-geo-dark">{course.duration}</div>
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold font-display text-white mb-2">{course.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed mb-4">{course.description}</p>
+                  <h3 className="text-lg font-bold font-display text-geo-dark mb-2">{course.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4">{course.description}</p>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
                       <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2">Topics Covered</div>
                       <ul className="space-y-1.5">
                         {course.topics.slice(0, 4).map((t) => (
-                          <li key={t} className="flex items-start gap-1.5 text-xs text-slate-400">
+                          <li key={t} className="flex items-start gap-1.5 text-xs text-slate-600">
                             <CheckCircle className="w-3 h-3 text-geo-emerald flex-shrink-0 mt-0.5" />
                             {t}
                           </li>
@@ -206,14 +208,14 @@ export default function TrainingPage() {
                           <item.icon className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
                           <div>
                             <div className="text-[9px] text-slate-600 uppercase tracking-wide">{item.label}</div>
-                            <div className="text-xs text-slate-300">{item.value}</div>
+                            <div className="text-xs text-slate-600">{item.value}</div>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-geo-border/30">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-200">
                     <div className="text-sm text-geo-copper font-medium">{course.price}</div>
                     <Link href="/contact" className="flex items-center gap-1.5 text-sm text-geo-cyan hover:text-cyan-300 transition-colors">
                       Enroll Now <ArrowRight className="w-3.5 h-3.5" />

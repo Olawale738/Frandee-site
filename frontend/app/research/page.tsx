@@ -31,11 +31,12 @@ const disciplines = ['Applied Geophysics', 'Hydrogeology', 'Engineering Geology'
 
 export default function ResearchPage() {
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
 
       {/* Hero */}
-      <section className="relative py-20 lg:py-28 overflow-hidden">
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-geo-dark">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute right-0 top-0 w-1/2 h-full opacity-10">
             <Image src="/images/conferences/conf-01.jpg" alt="" fill className="object-cover object-left" />
@@ -73,7 +74,7 @@ export default function ResearchPage() {
       </section>
 
       {/* Stats bar */}
-      <section className="section-padding-sm border-y border-geo-border/30">
+      <section className="section-padding-sm border-y border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -84,7 +85,7 @@ export default function ResearchPage() {
             ].map((s) => (
               <div key={s.label}>
                 <div className="text-3xl font-bold font-display text-geo-cyan mb-1">{s.value}</div>
-                <div className="text-sm text-slate-400">{s.label}</div>
+                <div className="text-sm text-slate-600">{s.label}</div>
               </div>
             ))}
           </div>
@@ -100,8 +101,8 @@ export default function ResearchPage() {
               <span className="text-xs font-mono tracking-widest text-geo-copper uppercase">What We Offer</span>
               <div className="h-px w-8 bg-geo-copper" />
             </div>
-            <h2 className="text-4xl font-bold font-display text-white mb-4">Publication Support Services</h2>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold font-display text-geo-dark mb-4">Publication Support Services</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               Every service is delivered by a geoscience-trained specialist — someone who understands your subject, not just your sentences.
             </p>
           </div>
@@ -113,8 +114,8 @@ export default function ResearchPage() {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${svc.color === 'cyan' ? 'bg-geo-cyan/10' : svc.color === 'copper' ? 'bg-geo-copper/10' : 'bg-geo-emerald/10'}`}>
                     <Icon className={`w-6 h-6 ${svc.color === 'cyan' ? 'text-geo-cyan' : svc.color === 'copper' ? 'text-geo-copper' : 'text-geo-emerald'}`} />
                   </div>
-                  <h3 className="text-lg font-bold font-display text-white mb-2 group-hover:text-geo-cyan transition-colors">{svc.title}</h3>
-                  <p className="text-sm text-slate-400 mb-4 leading-relaxed">{svc.description}</p>
+                  <h3 className="text-lg font-bold font-display text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors">{svc.title}</h3>
+                  <p className="text-sm text-slate-600 mb-4 leading-relaxed">{svc.description}</p>
                   <ul className="space-y-1.5">
                     {svc.includes.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-xs text-slate-500">
@@ -131,7 +132,7 @@ export default function ResearchPage() {
       </section>
 
       {/* How it works */}
-      <section className="section-padding bg-geo-dark/40">
+      <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -139,8 +140,8 @@ export default function ResearchPage() {
               <span className="text-xs font-mono tracking-widest text-geo-cyan uppercase">Simple Process</span>
               <div className="h-px w-8 bg-geo-cyan" />
             </div>
-            <h2 className="text-4xl font-bold font-display text-white mb-4">How It Works</h2>
-            <p className="text-lg text-slate-400 max-w-xl mx-auto">A straightforward four-step process from first contact to final manuscript.</p>
+            <h2 className="text-4xl font-bold font-display text-geo-dark mb-4">How It Works</h2>
+            <p className="text-lg text-slate-600 max-w-xl mx-auto">A straightforward four-step process from first contact to final manuscript.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, i) => (
@@ -150,8 +151,8 @@ export default function ResearchPage() {
                 )}
                 <div className="glass-card rounded-2xl p-6 relative z-10">
                   <div className="text-4xl font-bold font-mono text-geo-cyan/20 mb-3">{step.step}</div>
-                  <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{step.description}</p>
+                  <h3 className="text-base font-bold text-geo-dark mb-2">{step.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
                 </div>
               </div>
             ))}
@@ -168,13 +169,13 @@ export default function ResearchPage() {
                 <div className="h-px w-8 bg-geo-copper" />
                 <span className="text-xs font-mono tracking-widest text-geo-copper uppercase">Subject Expertise</span>
               </div>
-              <h2 className="text-4xl font-bold font-display text-white mb-5">Disciplines We Cover</h2>
-              <p className="text-slate-400 leading-relaxed mb-8">
+              <h2 className="text-4xl font-bold font-display text-geo-dark mb-5">Disciplines We Cover</h2>
+              <p className="text-slate-600 leading-relaxed mb-8">
                 Our support team brings genuine geoscience expertise — we understand the terminology, the methods, and the journals. Only specialists who have worked in the field.
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
                 {disciplines.map((d) => (
-                  <span key={d} className="px-3 py-1.5 rounded-full text-xs font-medium bg-geo-panel border border-geo-border/40 text-slate-300 hover:border-geo-cyan/30 hover:text-white transition-all">{d}</span>
+                  <span key={d} className="px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-600 hover:border-geo-cyan/30 hover:text-geo-dark transition-all">{d}</span>
                 ))}
               </div>
               <Link href="/contact" className="btn-copper">
@@ -213,8 +214,8 @@ export default function ResearchPage() {
               <div className="w-14 h-14 rounded-2xl bg-geo-copper/10 flex items-center justify-center mx-auto mb-6">
                 <FileEdit className="w-7 h-7 text-geo-copper" />
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold font-display text-white mb-4">Ready to Get Published?</h2>
-              <p className="text-lg text-slate-400 mb-8 max-w-xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-bold font-display text-geo-dark mb-4">Ready to Get Published?</h2>
+              <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">
                 Send your manuscript today. We will review it and provide a scope, timeline, and fee within 24 hours.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">

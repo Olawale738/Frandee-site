@@ -10,18 +10,11 @@ import {
   Globe, Droplets, FlaskConical, Target, BarChart3,
   FileText, Phone,
 } from 'lucide-react';
+import { SERVICES } from '@/lib/data';
 
-const services = [
-  { name: 'Geological Mapping', href: '/services#geological', icon: Layers },
-  { name: 'Geophysical Surveys', href: '/services#geophysics', icon: Activity },
-  { name: 'Remote Sensing', href: '/services#remote-sensing', icon: Globe },
-  { name: 'GIS & Spatial Analysis', href: '/services#gis', icon: MapPin },
-  { name: 'Hydrogeology', href: '/services#hydro', icon: Droplets },
-  { name: 'Environmental Assessment', href: '/services#environmental', icon: FlaskConical },
-  { name: 'Mineral Exploration', href: '/services#exploration', icon: Target },
-  { name: 'Data Interpretation', href: '/services#data', icon: BarChart3 },
-  { name: 'Regulatory Support', href: '/services#regulatory', icon: FileText },
-];
+const iconMap = {
+  Layers, Activity, Globe, MapPin, Droplets, FlaskConical, Target, BarChart3, FileText,
+};
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -122,24 +115,27 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.97 }}
                           transition={{ duration: 0.15, ease: 'easeOut' }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-geo-dark/95 backdrop-blur-xl border border-geo-border/60 rounded-2xl shadow-panel overflow-hidden"
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-geo-dark/95 backdrop-blur-xl border border-geo-border/60 rounded-2xl shadow-panel overflow-hidden"
                         >
-                          <div className="p-2">
+                          <div className="p-2 max-h-[72vh] overflow-y-auto">
                             <div className="px-3 pt-2 pb-1">
                               <span className="text-[10px] font-mono tracking-widest text-geo-cyan uppercase">Our Services</span>
                             </div>
-                            {services.map((s) => (
-                              <Link
-                                key={s.name}
-                                href={s.href}
-                                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-geo-cyan/5 transition-colors group"
-                              >
-                                <div className="w-7 h-7 rounded-lg bg-geo-panel flex items-center justify-center group-hover:bg-geo-cyan/10 transition-colors">
-                                  <s.icon className="w-3.5 h-3.5 text-geo-cyan/60 group-hover:text-geo-cyan transition-colors" />
-                                </div>
-                                <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{s.name}</span>
-                              </Link>
-                            ))}
+                            {SERVICES.map((service) => {
+                              const Icon = iconMap[service.icon as keyof typeof iconMap] || Layers;
+                              return (
+                                <Link
+                                  key={service.id}
+                                  href={`/services#${service.id}`}
+                                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-geo-cyan/5 transition-colors group"
+                                >
+                                  <div className="w-7 h-7 rounded-lg bg-geo-panel flex items-center justify-center group-hover:bg-geo-cyan/10 transition-colors">
+                                    <Icon className="w-3.5 h-3.5 text-geo-cyan/60 group-hover:text-geo-cyan transition-colors" />
+                                  </div>
+                                  <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{service.title}</span>
+                                </Link>
+                              );
+                            })}
                             <div className="mt-2 pt-2 border-t border-geo-border/40 px-3 pb-2">
                               <Link href="/services" className="text-xs text-geo-copper hover:text-geo-copper-light transition-colors font-medium">
                                 View all services →

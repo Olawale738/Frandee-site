@@ -3,17 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Mail, Phone, Linkedin, Youtube, Facebook, MessageCircle } from 'lucide-react';
-
-const services = [
-  { name: 'Geological Mapping', href: '/services#geological' },
-  { name: 'Geophysical Surveys', href: '/services#geophysics' },
-  { name: 'Remote Sensing', href: '/services#remote-sensing' },
-  { name: 'GIS & Spatial Analysis', href: '/services#gis' },
-  { name: 'Hydrogeology', href: '/services#hydro' },
-  { name: 'Environmental Assessment', href: '/services#environmental' },
-  { name: 'Mineral Exploration', href: '/services#exploration' },
-  { name: 'Data Interpretation', href: '/services#data' },
-];
+import { SERVICES } from '@/lib/data';
 
 const company = [
   { name: 'About', href: '/about' },
@@ -80,13 +70,13 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-mono tracking-widest text-geo-cyan uppercase mb-5">Services</h4>
             <ul className="space-y-2.5">
-              {services.map((s) => (
-                <li key={s.name}>
+              {SERVICES.map((s) => (
+                <li key={s.id}>
                   <Link
-                    href={s.href}
+                    href={`/services#${s.id}`}
                     className="text-sm text-slate-400 hover:text-white transition-colors animated-underline"
                   >
-                    {s.name}
+                    {s.title}
                   </Link>
                 </li>
               ))}

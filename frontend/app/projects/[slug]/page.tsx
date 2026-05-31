@@ -30,7 +30,7 @@ export default function ProjectDetailPage({ params }: Props) {
   const related = PROJECTS.filter((p) => p.id !== project.id && p.category === project.category).slice(0, 2);
 
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
+    <div className="bg-slate-50 min-h-screen pt-20 text-slate-900">
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="relative h-[60vh] min-h-[400px] bg-geo-panel">
@@ -77,14 +77,14 @@ export default function ProjectDetailPage({ params }: Props) {
           <div className="lg:col-span-2 space-y-10">
             {/* Overview */}
             <div>
-              <h2 className="text-xl font-bold font-display text-white mb-4">Project Overview</h2>
-              <p className="text-slate-400 leading-relaxed text-lg">{project.description}</p>
+              <h2 className="text-xl font-bold font-display text-geo-dark mb-4">Project Overview</h2>
+              <p className="text-slate-600 leading-relaxed text-lg">{project.description}</p>
             </div>
 
             {/* Methodology */}
             <div>
-              <h2 className="text-xl font-bold font-display text-white mb-4">Methodology & Approach</h2>
-              <p className="text-slate-400 leading-relaxed mb-4">
+              <h2 className="text-xl font-bold font-display text-geo-dark mb-4">Methodology & Approach</h2>
+              <p className="text-slate-600 leading-relaxed mb-4">
                 Our integrated approach combined traditional field methods with modern geoscience technology to deliver exceptional results within the project timeline and budget. The program was designed to systematically de-risk the target and generate high-confidence drill targets.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -93,7 +93,7 @@ export default function ProjectDetailPage({ params }: Props) {
                     <div className="w-8 h-8 rounded-lg bg-geo-cyan/10 flex items-center justify-center flex-shrink-0">
                       <Target className="w-4 h-4 text-geo-cyan" />
                     </div>
-                    <span className="text-sm text-slate-300">{tech}</span>
+                    <span className="text-sm text-slate-600">{tech}</span>
                   </div>
                 ))}
               </div>
@@ -101,11 +101,11 @@ export default function ProjectDetailPage({ params }: Props) {
 
             {/* Key outcomes */}
             <div>
-              <h2 className="text-xl font-bold font-display text-white mb-4">Key Outcomes</h2>
+              <h2 className="text-xl font-bold font-display text-geo-dark mb-4">Key Outcomes</h2>
               <div className="p-6 rounded-2xl glass-card border-l-2 border-l-geo-emerald">
                 <ul className="space-y-3">
                   {project.outcomes.map((outcome) => (
-                    <li key={outcome} className="flex items-start gap-3 text-slate-300">
+                    <li key={outcome} className="flex items-start gap-3 text-slate-600">
                       <CheckCircle className="w-5 h-5 text-geo-emerald flex-shrink-0 mt-0.5" />
                       {outcome}
                     </li>
@@ -117,7 +117,7 @@ export default function ProjectDetailPage({ params }: Props) {
             {/* Survey area info */}
             {project.area !== 'N/A' && (
               <div>
-                <h2 className="text-xl font-bold font-display text-white mb-4">Survey Coverage</h2>
+                <h2 className="text-xl font-bold font-display text-geo-dark mb-4">Survey Coverage</h2>
                 <div className="rounded-2xl overflow-hidden bg-geo-panel aspect-[16/8] relative">
                   {/* Map placeholder with geological pattern */}
                   <div className="absolute inset-0 geo-grid-bg" />
@@ -160,7 +160,7 @@ export default function ProjectDetailPage({ params }: Props) {
                 ].map((item) => (
                   <div key={item.label} className="flex justify-between items-start text-sm">
                     <span className="text-slate-500">{item.label}</span>
-                    <span className="text-white font-medium text-right max-w-[55%]">{item.value}</span>
+                    <span className="text-geo-dark font-medium text-right max-w-[55%]">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -171,7 +171,7 @@ export default function ProjectDetailPage({ params }: Props) {
               <div className="text-[10px] font-mono text-geo-copper tracking-widest uppercase mb-4">Technologies</div>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-geo-panel border border-geo-border/30 text-xs text-slate-400">
+                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600">
                     {tech}
                   </span>
                 ))}
@@ -180,8 +180,8 @@ export default function ProjectDetailPage({ params }: Props) {
 
             {/* CTA */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-geo-cyan/10 to-geo-copper/5 border border-geo-cyan/20">
-              <h3 className="font-bold text-white mb-2">Similar Project?</h3>
-              <p className="text-sm text-slate-400 mb-4">Let's discuss how we can deliver comparable results for your project.</p>
+              <h3 className="font-bold text-geo-dark mb-2">Similar Project?</h3>
+              <p className="text-sm text-slate-600 mb-4">Let's discuss how we can deliver comparable results for your project.</p>
               <Link href="/contact" className="btn-primary text-sm w-full justify-center">
                 Start a Conversation <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -193,7 +193,7 @@ export default function ProjectDetailPage({ params }: Props) {
         {related.length > 0 && (
           <div className="mt-20">
             <div className="flex items-center gap-2 mb-8">
-              <h2 className="text-2xl font-bold font-display text-white">Related Projects</h2>
+              <h2 className="text-2xl font-bold font-display text-geo-dark">Related Projects</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {related.map((p) => (
@@ -207,7 +207,7 @@ export default function ProjectDetailPage({ params }: Props) {
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-geo-cyan">{p.category}</span>
-                    <h3 className="font-semibold text-white text-sm mt-0.5 group-hover:text-geo-cyan transition-colors leading-tight">{p.title}</h3>
+                    <h3 className="font-semibold text-geo-dark text-sm mt-0.5 group-hover:text-geo-cyan transition-colors leading-tight">{p.title}</h3>
                     <div className="text-xs text-slate-500 mt-1 flex items-center gap-1">
                       <MapPin className="w-3 h-3" /> {p.region}
                     </div>

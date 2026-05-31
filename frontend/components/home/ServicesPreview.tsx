@@ -7,18 +7,11 @@ import {
   Target, BarChart3, FileText, ArrowRight,
 } from 'lucide-react';
 import SectionHeader from '@/components/shared/SectionHeader';
+import { SERVICES } from '@/lib/data';
 
-const services = [
-  { icon: Layers, title: 'Geological Mapping', description: 'Systematic bedrock and surface mapping programs using modern field and remote techniques.', color: 'cyan', href: '/services#geological' },
-  { icon: Activity, title: 'Geophysical Surveys', description: 'Ground and airborne geophysics including IP, EM, magnetics, gravity, and seismic methods.', color: 'copper', href: '/services#geophysics' },
-  { icon: Globe, title: 'Remote Sensing', description: 'Multi-spectral satellite imagery analysis for lithological and alteration mapping at scale.', color: 'emerald', href: '/services#remote-sensing' },
-  { icon: MapPin, title: 'GIS & Spatial Analysis', description: 'Advanced spatial data management, analysis, and visualization for exploration programs.', color: 'cyan', href: '/services#gis' },
-  { icon: Droplets, title: 'Hydrogeology', description: 'Groundwater exploration, aquifer characterization, and water resource management studies.', color: 'cyan', href: '/services#hydro' },
-  { icon: FlaskConical, title: 'Environmental Assessment', description: 'EIAs, ESIAs, and environmental baseline surveys for regulatory compliance worldwide.', color: 'emerald', href: '/services#environmental' },
-  { icon: Target, title: 'Mineral Exploration', description: 'End-to-end exploration programs from first-pass reconnaissance to drill-ready targets.', color: 'copper', href: '/services#exploration' },
-  { icon: BarChart3, title: 'Data Interpretation', description: 'Integrated 3D modeling and geostatistical analysis of complex multi-source datasets.', color: 'cyan', href: '/services#data' },
-  { icon: FileText, title: 'Regulatory Support', description: 'Expert guidance through complex permitting and compliance requirements worldwide.', color: 'copper', href: '/services#regulatory' },
-];
+const iconMap = {
+  Layers, Activity, Globe, MapPin, Droplets, FlaskConical, Target, BarChart3, FileText,
+};
 
 const colorMap = {
   cyan: { bg: 'bg-geo-cyan/10', icon: 'text-geo-cyan', border: 'hover:border-geo-cyan/30' },
@@ -42,8 +35,9 @@ export default function ServicesPreview() {
           className="mb-16"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((service, i) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {SERVICES.map((service, i) => {
+            const Icon = iconMap[service.icon as keyof typeof iconMap] || Layers;
             const colors = colorMap[service.color as keyof typeof colorMap];
             return (
               <motion.div
@@ -54,17 +48,17 @@ export default function ServicesPreview() {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
               >
                 <Link
-                  href={service.href}
+                  href={`/services#${service.id}`}
                   className={`group block p-6 rounded-xl bg-white border border-slate-200 shadow-sm ${colors.border} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl service-card`}
                 >
                   <div className={`w-11 h-11 rounded-xl ${colors.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <service.icon className={`w-5 h-5 ${colors.icon}`} />
+                    <Icon className={`w-5 h-5 ${colors.icon}`} />
                   </div>
                   <h3 className="text-base font-semibold font-display text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    {service.description}
+                    {service.shortDescription}
                   </p>
                   <div className="mt-4 flex items-center gap-1 text-xs text-slate-500 group-hover:text-geo-cyan transition-colors">
                     <span>Learn more</span>

@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { ComponentType } from 'react';
 import {
   Layers, Activity, Globe, MapPin, Droplets, FlaskConical,
   Target, BarChart3, FileText, ArrowRight, CheckCircle,
 } from 'lucide-react';
-import SectionHeader from '@/components/shared/SectionHeader';
 import GeoBackground from '@/components/shared/GeoBackground';
 import { SERVICES } from '@/lib/data';
 import CTABanner from '@/components/home/CTABanner';
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: 'Full-stack geoscience services — geological mapping, geophysics, remote sensing, GIS, hydrogeology, environmental assessment, mineral exploration, data interpretation, and regulatory support.',
+  description: 'Integrated geoscience, oil and gas, petrophysics, reservoir basin modeling, geotechnics, pipeline corrosivity, geochemical analysis, environmental, GIS, and field support services.',
 };
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   Layers, Activity, Globe, MapPin, Droplets, FlaskConical, Target, BarChart3, FileText,
 };
 
@@ -25,30 +25,46 @@ const colorClasses = {
     bg: 'bg-geo-cyan/10',
     border: 'border-geo-cyan/20',
     badge: 'bg-geo-cyan/10 text-geo-cyan border-geo-cyan/20',
-    glow: 'shadow-geo',
   },
   copper: {
     icon: 'text-geo-copper',
     bg: 'bg-geo-copper/10',
     border: 'border-geo-copper/20',
     badge: 'bg-geo-copper/10 text-geo-copper border-geo-copper/20',
-    glow: 'shadow-copper',
   },
   emerald: {
     icon: 'text-geo-emerald',
     bg: 'bg-geo-emerald/10',
     border: 'border-geo-emerald/20',
     badge: 'bg-geo-emerald/10 text-geo-emerald border-geo-emerald/20',
-    glow: 'shadow-emerald',
   },
 };
 
+const serviceGallery = [
+  {
+    src: '/images/ves-ert/ves-12.jpg',
+    title: 'Electrical resistivity field acquisition',
+  },
+  {
+    src: '/images/mineral-exploration/mineral-13.jpg',
+    title: 'Mineral exploration terrain assessment',
+  },
+  {
+    src: '/images/conferences/conf-08.jpg',
+    title: 'Technical review and stakeholder briefing',
+  },
+  {
+    src: '/images/students/student-03.jpg',
+    title: 'Geoscience training and data review',
+  },
+];
+
 export default function ServicesPage() {
   return (
-    <div className="bg-geo-black min-h-screen pt-20">
-      {/* Hero */}
-      <section className="relative py-20 lg:py-24 overflow-hidden">
+    <div className="min-h-screen bg-slate-50 pt-20 text-slate-900">
+      <section className="relative overflow-hidden bg-geo-dark py-20 lg:py-24">
         <GeoBackground />
+        <div className="absolute inset-0 bg-gradient-to-br from-geo-dark via-geo-navy to-geo-black/95" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <div className="h-px w-8 bg-geo-cyan" />
@@ -56,19 +72,42 @@ export default function ServicesPage() {
             <div className="h-px w-8 bg-geo-cyan" />
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-6">
-            Integrated{' '}
-            <span className="text-gradient-cyan">Geoscience</span>
+            Integrated <span className="text-gradient-cyan">Geoscience</span>
             <br />
             Services
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            From satellite imagery to deep subsurface modeling — every discipline you need to take your project from concept to confidence.
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            From field operations and geotechnics to petrophysics, reservoir basin evaluation, oil and gas support, and geochemical interpretation.
           </p>
         </div>
       </section>
 
-      {/* Services */}
-      <div className="space-y-2">
+      <section className="border-b border-slate-200 bg-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {SERVICES.map((service) => {
+              const Icon = iconMap[service.icon] || Layers;
+              const colors = colorClasses[service.color as keyof typeof colorClasses] || colorClasses.cyan;
+              return (
+                <Link
+                  key={service.id}
+                  href={`#${service.id}`}
+                  className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 transition-all hover:-translate-y-0.5 hover:border-geo-cyan/30 hover:bg-white hover:shadow-lg"
+                >
+                  <span className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${colors.bg}`}>
+                    <Icon className={`h-4 w-4 ${colors.icon}`} />
+                  </span>
+                  <span className="text-sm font-semibold text-slate-700 transition-colors group-hover:text-geo-dark">
+                    {service.title}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <div>
         {SERVICES.map((service, i) => {
           const Icon = iconMap[service.icon] || Layers;
           const colors = colorClasses[service.color as keyof typeof colorClasses] || colorClasses.cyan;
@@ -78,62 +117,59 @@ export default function ServicesPage() {
             <section
               key={service.id}
               id={service.id}
-              className={`section-padding relative overflow-hidden ${isEven ? 'bg-geo-black' : 'bg-geo-dark/60'}`}
+              className={`relative scroll-mt-24 overflow-hidden py-16 lg:py-24 ${isEven ? 'bg-slate-50' : 'bg-white'}`}
             >
-              <div className="absolute inset-0 geo-grid-bg opacity-30" />
+              <div className="absolute inset-0 geo-grid-bg opacity-20" />
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
-                  {/* Content */}
-                  <div className={!isEven ? 'lg:order-2' : ''}>
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className={`w-12 h-12 rounded-2xl ${colors.bg} flex items-center justify-center`}>
-                        <Icon className={`w-6 h-6 ${colors.icon}`} />
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+                  <div className={isEven ? '' : 'lg:order-2'}>
+                    <div className="mb-5 flex items-center gap-3">
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${colors.bg} border ${colors.border}`}>
+                        <Icon className={`h-6 w-6 ${colors.icon}`} />
                       </div>
-                      <span className={`text-xs font-mono tracking-widest uppercase px-3 py-1 rounded-full border ${colors.badge}`}>
+                      <span className={`rounded-full border px-3 py-1 text-xs font-mono uppercase tracking-widest ${colors.badge}`}>
                         {String(i + 1).padStart(2, '0')} / Service
                       </span>
                     </div>
 
-                    <h2 className="text-3xl lg:text-4xl font-bold font-display text-white mb-4 leading-tight">
+                    <h2 className="mb-4 text-3xl font-bold font-display leading-tight text-geo-dark lg:text-4xl">
                       {service.title}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed mb-6 text-lg">{service.description}</p>
+                    <p className="mb-6 text-lg leading-relaxed text-slate-600">{service.description}</p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-                      {/* Process */}
-                      <div className="p-4 rounded-xl bg-geo-panel border border-geo-border/30">
-                        <div className="text-[10px] font-mono text-geo-cyan tracking-widest uppercase mb-3">Process</div>
+                    <div className="mb-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <div className="mb-3 text-[10px] font-mono uppercase tracking-widest text-geo-cyan">Process</div>
                         <ol className="space-y-2">
                           {service.process.map((step, j) => (
-                            <li key={j} className="flex items-start gap-2 text-xs text-slate-400">
-                              <span className="font-mono text-geo-cyan/60 flex-shrink-0">{String(j + 1).padStart(2, '0')}.</span>
+                            <li key={step} className="flex items-start gap-2 text-xs leading-relaxed text-slate-600">
+                              <span className="flex-shrink-0 font-mono text-geo-cyan">{String(j + 1).padStart(2, '0')}.</span>
                               {step}
                             </li>
                           ))}
                         </ol>
                       </div>
-                      {/* Deliverables */}
-                      <div className="p-4 rounded-xl bg-geo-panel border border-geo-border/30">
-                        <div className="text-[10px] font-mono text-geo-copper tracking-widest uppercase mb-3">Deliverables</div>
+
+                      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <div className="mb-3 text-[10px] font-mono uppercase tracking-widest text-geo-copper">Deliverables</div>
                         <ul className="space-y-2">
-                          {service.deliverables.map((d) => (
-                            <li key={d} className="flex items-start gap-2 text-xs text-slate-400">
-                              <CheckCircle className="w-3 h-3 text-geo-emerald flex-shrink-0 mt-0.5" />
-                              {d}
+                          {service.deliverables.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-xs leading-relaxed text-slate-600">
+                              <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-geo-emerald" />
+                              {item}
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
 
-                    {/* Technologies */}
-                    <div className="mb-6">
-                      <div className="text-[10px] font-mono text-slate-500 tracking-widest uppercase mb-3">Technologies Used</div>
+                    <div className="mb-7">
+                      <div className="mb-3 text-[10px] font-mono uppercase tracking-widest text-slate-500">Technologies Used</div>
                       <div className="flex flex-wrap gap-2">
                         {service.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 rounded-lg bg-geo-panel border border-geo-border/30 text-xs text-slate-400"
+                            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-600 shadow-sm"
                           >
                             {tech}
                           </span>
@@ -143,13 +179,12 @@ export default function ServicesPage() {
 
                     <Link href="/contact" className="btn-primary inline-flex group">
                       Discuss This Service
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
 
-                  {/* Image */}
-                  <div className={!isEven ? 'lg:order-1' : ''}>
-                    <div className="relative rounded-2xl overflow-hidden aspect-[16/11] bg-geo-panel">
+                  <div className={isEven ? '' : 'lg:order-1'}>
+                    <div className="relative aspect-[16/11] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-2xl shadow-slate-200">
                       <Image
                         src={service.image}
                         alt={service.title}
@@ -157,10 +192,10 @@ export default function ServicesPage() {
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-geo-black/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-geo-dark/70 via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
                         {service.technologies.slice(0, 3).map((tech) => (
-                          <span key={tech} className="px-2 py-1 rounded-lg bg-geo-black/60 backdrop-blur-sm text-[10px] text-slate-300 border border-geo-border/30">
+                          <span key={tech} className="rounded-lg border border-white/20 bg-geo-black/65 px-2 py-1 text-[10px] text-slate-100 backdrop-blur-sm">
                             {tech}
                           </span>
                         ))}
@@ -173,6 +208,45 @@ export default function ServicesPage() {
           );
         })}
       </div>
+
+      <section className="bg-white py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 max-w-3xl">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="h-px w-8 bg-geo-copper" />
+              <span className="text-xs font-mono tracking-widest text-geo-copper uppercase">Field Capability</span>
+            </div>
+            <h2 className="text-3xl font-bold font-display text-geo-dark lg:text-4xl">
+              More Field Evidence, No Repeated Service Images
+            </h2>
+            <p className="mt-4 text-slate-600">
+              A wider view of Frandee's field, training, exploration, and technical review work across geoscience assignments.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+            {serviceGallery.map((item, index) => (
+              <div
+                key={item.src}
+                className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
+              >
+                <div className={index === 0 ? 'aspect-[4/3] md:aspect-auto md:h-full min-h-[360px]' : 'aspect-[4/3]'}>
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes={index === 0 ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 25vw'}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-geo-dark/75 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-sm font-semibold text-white">{item.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <CTABanner />
     </div>
