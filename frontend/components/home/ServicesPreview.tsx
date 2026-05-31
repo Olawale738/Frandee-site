@@ -28,16 +28,17 @@ const colorMap = {
 
 export default function ServicesPreview() {
   return (
-    <section className="section-padding relative bg-geo-black overflow-hidden">
-      <div className="absolute inset-0 geo-grid-bg opacity-40" />
-      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-geo-copper/3 rounded-full blur-3xl" />
+    <section className="section-padding relative bg-slate-50 overflow-hidden">
+      <div className="absolute inset-0 geo-grid-bg opacity-15" />
+      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-geo-cyan/10 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="What We Do"
           title="Integrated Geoscience"
           titleHighlight="Solutions"
-          description="Comprehensive geoscience capabilities under one roof — from satellite to subsurface, field to database, exploration to compliance."
+          description="Comprehensive geoscience capabilities under one roof: from satellite to subsurface, field to database, exploration to compliance."
+          tone="light"
           className="mb-16"
         />
 
@@ -54,15 +55,15 @@ export default function ServicesPreview() {
               >
                 <Link
                   href={service.href}
-                  className={`group block p-6 rounded-2xl glass-card border border-geo-border/30 ${colors.border} transition-all duration-300 hover:-translate-y-1 hover:shadow-panel service-card`}
+                  className={`group block p-6 rounded-xl bg-white border border-slate-200 shadow-sm ${colors.border} transition-all duration-300 hover:-translate-y-1 hover:shadow-xl service-card`}
                 >
                   <div className={`w-11 h-11 rounded-xl ${colors.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     <service.icon className={`w-5 h-5 ${colors.icon}`} />
                   </div>
-                  <h3 className="text-base font-semibold font-display text-white mb-2 group-hover:text-geo-cyan transition-colors">
+                  <h3 className="text-base font-semibold font-display text-geo-dark mb-2 group-hover:text-geo-cyan transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {service.description}
                   </p>
                   <div className="mt-4 flex items-center gap-1 text-xs text-slate-500 group-hover:text-geo-cyan transition-colors">

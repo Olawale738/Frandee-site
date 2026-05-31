@@ -8,12 +8,12 @@
   --font-inter: 'Inter', sans-serif;
   --font-space-grotesk: 'Space Grotesk', sans-serif;
   --font-jetbrains-mono: 'JetBrains Mono', monospace;
-  --geo-black: #060a12;
-  --geo-dark: #0d1525;
-  --geo-navy: #111827;
+  --geo-black: #07111f;
+  --geo-dark: #0B1F3A;
+  --geo-navy: #102D4A;
   --geo-copper: #b87333;
   --geo-emerald: #10b981;
-  --geo-cyan: #06b6d4;
+  --geo-cyan: #00B7C7;
 }
 
 html {
@@ -22,8 +22,8 @@ html {
 }
 
 body {
-  background-color: var(--geo-black);
-  color: #f1f5f9;
+  background-color: #f8fafc;
+  color: #102033;
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -93,14 +93,14 @@ body {
 
 /* Glass morphism card */
 .glass-card {
-  background: rgba(13, 21, 37, 0.8);
+  background: rgba(11, 31, 58, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(6, 182, 212, 0.1);
 }
 
 .glass-card-copper {
-  background: rgba(13, 21, 37, 0.8);
+  background: rgba(11, 31, 58, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(184, 115, 51, 0.15);
@@ -135,7 +135,7 @@ body {
 
 /* Data panel style */
 .data-panel {
-  background: rgba(14, 20, 37, 0.9);
+  background: rgba(11, 31, 58, 0.92);
   border: 1px solid rgba(30, 45, 69, 0.8);
   border-top: 1px solid rgba(6, 182, 212, 0.2);
 }
@@ -166,11 +166,11 @@ body {
 
 /* Button styles */
 .btn-primary {
-  @apply inline-flex items-center gap-2 px-6 py-3 bg-geo-cyan text-geo-black font-semibold rounded-lg transition-all duration-300 hover:bg-cyan-400 hover:shadow-glow-cyan hover:-translate-y-0.5 active:translate-y-0;
+  @apply inline-flex items-center gap-2 px-6 py-3 bg-geo-cyan text-white font-semibold rounded-lg transition-all duration-300 hover:bg-geo-cyan-dark hover:shadow-glow-cyan hover:-translate-y-0.5 active:translate-y-0;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 px-6 py-3 border border-geo-cyan/30 text-geo-cyan font-semibold rounded-lg transition-all duration-300 hover:bg-geo-cyan/10 hover:border-geo-cyan/60 hover:-translate-y-0.5;
+  @apply inline-flex items-center gap-2 px-6 py-3 border border-geo-cyan/40 text-geo-cyan font-semibold rounded-lg transition-all duration-300 hover:bg-geo-cyan/10 hover:border-geo-cyan hover:-translate-y-0.5;
 }
 
 .btn-copper {

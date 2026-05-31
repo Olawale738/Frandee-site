@@ -141,7 +141,7 @@ export default function ProjectsPage() {
                         )}
                       </div>
 
-                      <div className="flex items-center gap-1 text-xs text-geo-copper group-hover:text-copper-light transition-colors">
+                      <div className="flex items-center gap-1 text-xs text-geo-copper group-hover:text-geo-copper-light transition-colors">
                         <span>View case study</span>
                         <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                       </div>

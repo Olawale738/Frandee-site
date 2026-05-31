@@ -6,7 +6,7 @@ import { ArrowRight, Phone } from 'lucide-react';
 
 export default function CTABanner() {
   return (
-    <section className="relative py-20 overflow-hidden bg-geo-dark">
+    <section className="relative py-20 overflow-hidden bg-gradient-to-br from-geo-dark via-geo-black to-black">
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(6,182,212,0.08),transparent)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-geo-cyan/30 to-transparent" />
@@ -26,16 +26,16 @@ export default function CTABanner() {
         >
           <div className="flex items-center justify-center gap-2 mb-5">
             <div className="h-px w-10 bg-geo-cyan" />
-            <span className="text-xs font-mono tracking-widest text-geo-cyan uppercase">Ready to Explore?</span>
+            <span className="text-xs font-mono tracking-widest text-geo-cyan uppercase">Project Consultation</span>
             <div className="h-px w-10 bg-geo-cyan" />
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-white mb-5 leading-tight">
-            Let's Build Your{' '}
-            <span className="text-gradient-cyan">Next Discovery</span>
+            Let's scope geoscience projects{' '}
+            <span className="text-gradient-cyan">with confidence</span>
           </h2>
           <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Whether you're planning a greenfields exploration program, need regulatory support, or want to upskill your team — we're ready to help.
+            Whether you are planning exploration, engineering studies, environmental assessments, or technical research, our team can help define the right next move.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">

@@ -9,8 +9,8 @@ import ClientLogos from '@/components/home/ClientLogos';
 import WorkflowTimeline from '@/components/home/WorkflowTimeline';
 
 export const metadata: Metadata = {
-  title: 'Frandee Geoscience | Full-Stack Geoscience Services',
-  description: 'From reconnaissance to drill-ready targets. World-class geological exploration, geophysics, remote sensing, GIS, hydrogeology, and environmental services across Africa and beyond.',
+  title: 'Frandee Geoscience | Engineering & Geoscience Consulting',
+  description: 'Professional geoscience, engineering, oil and gas, environmental, and technical research services delivered with data-driven precision.',
 };
 
 export default function HomePage() {

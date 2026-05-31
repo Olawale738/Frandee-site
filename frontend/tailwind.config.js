@@ -10,21 +10,21 @@ module.exports = {
     extend: {
       colors: {
         geo: {
-          black: '#060a12',
-          dark: '#0d1525',
-          navy: '#111827',
+          black: '#07111f',
+          dark: '#0B1F3A',
+          navy: '#102D4A',
           copper: '#b87333',
           'copper-light': '#d4956a',
           emerald: '#10b981',
           'emerald-dark': '#065f46',
-          cyan: '#06b6d4',
-          'cyan-dark': '#0e7490',
+          cyan: '#00B7C7',
+          'cyan-dark': '#008C98',
           slate: '#64748b',
           sandstone: '#c4a882',
           'sandstone-light': '#e8d5b7',
           charcoal: '#1e293b',
-          panel: '#141c2e',
-          border: '#1e2d45',
+          panel: '#0f2945',
+          border: '#1f4663',
         },
       },
       fontFamily: {

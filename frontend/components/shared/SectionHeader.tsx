@@ -8,6 +8,7 @@ interface SectionHeaderProps {
   titleHighlight?: string;
   description?: string;
   align?: 'left' | 'center';
+  tone?: 'dark' | 'light';
   className?: string;
 }
 
@@ -17,9 +18,12 @@ export default function SectionHeader({
   titleHighlight,
   description,
   align = 'center',
+  tone = 'dark',
   className = '',
 }: SectionHeaderProps) {
   const alignClass = align === 'center' ? 'text-center items-center' : 'text-left items-start';
+  const titleClass = tone === 'light' ? 'text-geo-dark' : 'text-white';
+  const descriptionClass = tone === 'light' ? 'text-slate-600' : 'text-slate-400';
 
   return (
     <motion.div
@@ -38,14 +42,14 @@ export default function SectionHeader({
           <div className="h-px w-8 bg-geo-cyan" />
         </div>
       )}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-white leading-tight">
+      <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold font-display ${titleClass} leading-tight`}>
         {title}{' '}
         {titleHighlight && (
           <span className="text-gradient-cyan">{titleHighlight}</span>
         )}
       </h2>
       {description && (
-        <p className={`mt-4 text-slate-400 text-lg leading-relaxed ${align === 'center' ? 'max-w-2xl mx-auto' : 'max-w-2xl'}`}>
+        <p className={`mt-4 ${descriptionClass} text-lg leading-relaxed ${align === 'center' ? 'max-w-2xl mx-auto' : 'max-w-2xl'}`}>
           {description}
         </p>
       )}

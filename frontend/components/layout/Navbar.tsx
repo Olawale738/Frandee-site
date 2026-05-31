@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu, X, ChevronDown, MapPin, Layers, Activity,
   Globe, Droplets, FlaskConical, Target, BarChart3,
-  FileText, Phone, Briefcase,
+  FileText, Phone,
 } from 'lucide-react';
 
 const services = [
@@ -24,12 +24,12 @@ const services = [
 ];
 
 const navLinks = [
+  { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services', hasDropdown: true },
+  { name: 'Why Us', href: '/#why-us' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Research', href: '/research' },
-  { name: 'Training', href: '/training' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -70,7 +70,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-geo-black/95 backdrop-blur-xl border-b border-geo-border/50 shadow-lg'
+            ? 'bg-geo-dark/95 backdrop-blur-xl border-b border-white/10 shadow-lg'
             : 'bg-transparent'
         }`}
       >
@@ -169,17 +169,11 @@ export default function Navbar() {
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3">
               <Link
-                href="/careers"
-                className="text-sm text-slate-400 hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
-              >
-                Careers
-              </Link>
-              <Link
                 href="/contact"
                 className="btn-primary text-sm py-2.5 px-5"
               >
                 <Phone className="w-3.5 h-3.5" />
-                Contact Us
+                Start a Project
               </Link>
             </div>
 
@@ -263,25 +257,16 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-geo-border/40 space-y-1">
-                  <Link
-                    href="/careers"
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-all"
-                  >
-                    <Briefcase className="w-4 h-4 text-slate-500" />
-                    Careers
-                  </Link>
-                </div>
               </div>
 
               {/* Mobile CTA */}
               <div className="p-4 border-t border-geo-border/40">
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-geo-cyan text-geo-black font-semibold rounded-xl text-sm transition-all hover:bg-cyan-400"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-geo-cyan text-white font-semibold rounded-xl text-sm transition-all hover:bg-geo-cyan-dark"
                 >
                   <Phone className="w-4 h-4" />
-                  Contact Us
+                  Start a Project
                 </Link>
               </div>
             </div>

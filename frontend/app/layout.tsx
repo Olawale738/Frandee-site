@@ -5,11 +5,11 @@ import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Frandee Geoscience | Full-Stack Geoscience Services',
+    default: 'Frandee Geoscience | Engineering & Geoscience Consulting',
     template: '%s | Frandee Geoscience',
   },
   description:
-    'From reconnaissance to drill-ready targets — and everything in between. World-class geological exploration, geophysics, remote sensing, GIS, hydrogeology, and environmental services.',
+    'Professional geoscience, engineering, oil and gas, environmental, and technical research services delivered with data-driven precision.',
   keywords: [
     'geoscience',
     'geological exploration',
@@ -21,16 +21,20 @@ export const metadata: Metadata = {
     'drill target generation',
     'geochemical analysis',
     'mineral exploration',
+    'oil and gas consulting',
+    'engineering consulting',
+    'technical research',
   ],
   authors: [{ name: 'Frandee Geoscience' }],
   creator: 'Frandee Geoscience',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://frandeegeoscience.com',
+    url: 'https://frandeeconsultingservices.com',
     siteName: 'Frandee Geoscience',
-    title: 'Frandee Geoscience | Full-Stack Geoscience Services',
-    description: 'World-class geoscience intelligence platform — from reconnaissance to drill-ready targets.',
+    title: 'Frandee Geoscience | Engineering & Geoscience Consulting',
+    description:
+      'Professional geoscience intelligence for exploration, engineering, environmental, and research-led projects.',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -42,8 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Frandee Geoscience | Full-Stack Geoscience Services',
-    description: 'World-class geoscience intelligence platform — from reconnaissance to drill-ready targets.',
+    title: 'Frandee Geoscience | Engineering & Geoscience Consulting',
+    description:
+      'Professional geoscience intelligence for exploration, engineering, environmental, and research-led projects.',
     images: ['/images/og-image.jpg'],
   },
   robots: {
@@ -62,15 +67,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#060a12',
+  themeColor: '#0B1F3A',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-geo-black text-slate-100 font-sans antialiased overflow-x-hidden">
+      <body className="bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
         <div className="relative">
-          {/* Global noise texture */}
           <div
             className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.02]"
             style={{

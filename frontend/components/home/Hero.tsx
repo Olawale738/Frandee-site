@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { ArrowRight, ChevronDown, Layers, Activity, Globe, Target } from 'lucide-react';
 
 const pills = [
-  { icon: Layers, label: 'Geological Mapping' },
-  { icon: Activity, label: 'Geophysics' },
-  { icon: Globe, label: 'Remote Sensing' },
-  { icon: Target, label: 'Drill Targets' },
+  { icon: Layers, label: 'Engineering Studies' },
+  { icon: Activity, label: 'Geophysical Surveys' },
+  { icon: Globe, label: 'Environmental Consulting' },
+  { icon: Target, label: 'Oil & Gas Support' },
 ];
 
 export default function Hero() {
@@ -81,7 +81,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-geo-black">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-geo-dark">
       {/* Cinematic field photo background */}
       <div className="absolute inset-0">
         <Image
@@ -92,8 +92,8 @@ export default function Hero() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-geo-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-geo-black/90 via-geo-black/60 to-geo-black/30" />
+        <div className="absolute inset-0 bg-geo-dark/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-geo-dark/95 via-geo-dark/70 to-geo-dark/35" />
       </div>
 
       {/* Animated canvas background */}
@@ -127,7 +127,7 @@ export default function Hero() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-geo-cyan"></span>
             </span>
             <span className="text-xs font-mono tracking-widest text-geo-cyan uppercase">
-              Full-Stack Geoscience Services
+              Professional Geoscience & Engineering Consulting
             </span>
           </motion.div>
 
@@ -136,13 +136,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold font-display leading-[0.95] tracking-tight text-white mb-6"
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display leading-[1.02] tracking-tight text-white mb-6 max-w-5xl"
           >
-            Full-Stack
-            <br />
-            <span className="text-gradient-cyan">Geoscience</span>
-            <br />
-            Services
+            End-to-end geoscience services,{' '}
+            <span className="text-gradient-cyan">delivered with precision</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -152,8 +149,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="text-xl sm:text-2xl text-slate-400 mb-4 leading-relaxed max-w-2xl"
           >
-            From reconnaissance to drill-ready targets —{' '}
-            <span className="text-slate-200">and everything in between.</span>
+            Technical intelligence for exploration, engineering, oil and gas, environmental, and research-led projects.
           </motion.p>
 
           <motion.p
@@ -162,7 +158,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="text-base text-slate-500 mb-10 max-w-xl leading-relaxed"
           >
-            Delivering world-class geological intelligence to exploration companies, governments, research institutions, and mining operations across Africa and beyond.
+            Frandee combines field operations, geophysics, GIS, remote sensing, and data interpretation to help teams make confident decisions from first study to final report.
           </motion.p>
 
           {/* CTAs */}
@@ -172,12 +168,12 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-wrap gap-4 mb-12"
           >
-            <Link href="/services" className="btn-primary text-base px-8 py-4 group">
-              Explore Services
+            <Link href="/contact" className="btn-primary text-base px-8 py-4 group">
+              Let's Scope a Project
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/projects" className="btn-secondary text-base px-8 py-4">
-              View Projects
+              View Case Studies
             </Link>
           </motion.div>
 
@@ -198,7 +194,7 @@ export default function Hero() {
               </div>
             ))}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-geo-panel border border-geo-border/40 text-xs text-slate-400">
-              +9 more
+              Technical Research
             </div>
           </motion.div>
         </div>
@@ -217,12 +213,12 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-geo-cyan opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-geo-cyan"></span>
               </span>
-              Live Survey Data
+              Project Confidence
             </div>
             {[
-              { label: 'Active Projects', value: '14', unit: 'running' },
-              { label: 'Drill Targets', value: '38', unit: 'this year' },
-              { label: 'Area Surveyed', value: '2,400', unit: 'km²' },
+              { label: 'Technical Disciplines', value: '9', unit: 'integrated' },
+              { label: 'Field Programs', value: '120+', unit: 'supported' },
+              { label: 'Area Surveyed', value: '2,400', unit: 'km2' },
               { label: 'Data Points', value: '1.2M', unit: 'processed' },
             ].map((item) => (
               <div key={item.label} className="flex justify-between items-center py-2 border-b border-geo-border/30 last:border-0">

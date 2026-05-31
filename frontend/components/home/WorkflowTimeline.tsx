@@ -8,43 +8,43 @@ const steps = [
   {
     step: '01',
     icon: Search,
-    title: 'Reconnaissance',
-    description: 'Desktop study, regional remote sensing analysis, literature review, and initial target identification.',
+    title: 'Data-Driven Scoping',
+    description: 'Every engagement starts with clear objectives, available evidence, constraints, and measurable decision points.',
     color: 'cyan',
   },
   {
     step: '02',
     icon: Layers,
-    title: 'Geological Mapping',
-    description: 'Systematic field mapping to characterize lithology, structure, and mineralization across the project.',
+    title: 'Integrated Expertise',
+    description: 'Geology, geophysics, GIS, remote sensing, hydrogeology, and environmental teams work from one technical model.',
     color: 'copper',
   },
   {
     step: '03',
     icon: Activity,
-    title: 'Geophysical Surveys',
-    description: 'Multi-method geophysical surveys to define subsurface targets and guide drill planning.',
+    title: 'Field-Proven Delivery',
+    description: 'Survey programs are planned for real terrain, local logistics, safety, and defensible technical outputs.',
     color: 'emerald',
   },
   {
     step: '04',
     icon: Target,
-    title: 'Target Generation',
-    description: 'Integration of all datasets to prioritize and rank drill targets using 3D modeling.',
+    title: 'Risk Reduction',
+    description: 'We prioritize targets and recommendations so clients can invest with greater technical confidence.',
     color: 'cyan',
   },
   {
     step: '05',
     icon: BarChart3,
-    title: 'Data Interpretation',
-    description: 'Advanced interpretation and geostatistical analysis of field, geophysical, and geochemical data.',
+    title: 'Clear Reporting',
+    description: 'Outputs are structured for boards, regulators, investors, project teams, and technical reviewers.',
     color: 'copper',
   },
   {
     step: '06',
     icon: FileCheck,
-    title: 'Reporting & Compliance',
-    description: 'Comprehensive technical reporting, resource estimation, and regulatory compliance documentation.',
+    title: 'Long-Term Partner',
+    description: 'From early studies to implementation, we stay close to the project and its next decisions.',
     color: 'emerald',
   },
 ];
@@ -57,16 +57,16 @@ const colorMap = {
 
 export default function WorkflowTimeline() {
   return (
-    <section className="section-padding relative bg-geo-dark overflow-hidden">
+    <section id="why-us" className="section-padding relative bg-geo-dark overflow-hidden">
       <div className="absolute inset-0 geo-grid-bg opacity-40" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-geo-cyan/2 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Our Process"
-          title="From First Glimpse to"
-          titleHighlight="Drill-Ready Targets"
-          description="A systematic, data-driven approach that maximizes the probability of discovery while minimizing risk and cost."
+          eyebrow="Why Us"
+          title="Technical Authority,"
+          titleHighlight="Built for Trust"
+          description="A professional, data-driven operating model for engineering firms, geoscience companies, oil and gas teams, environmental consultants, and research organizations."
           className="mb-16"
         />
 

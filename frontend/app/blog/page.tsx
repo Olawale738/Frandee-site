@@ -152,7 +152,7 @@ export default function BlogPage() {
                   <p className="text-sm text-slate-400 leading-relaxed mb-4">{post.excerpt}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-slate-500">By {post.author}</span>
-                    <span className="text-xs text-geo-copper group-hover:text-copper-light flex items-center gap-1 transition-colors">
+                    <span className="text-xs text-geo-copper group-hover:text-geo-copper-light flex items-center gap-1 transition-colors">
                       Read more <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>

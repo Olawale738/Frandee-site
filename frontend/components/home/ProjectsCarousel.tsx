@@ -19,9 +19,9 @@ export default function ProjectsCarousel() {
   const project = featured[active];
 
   return (
-    <section className="section-padding relative bg-geo-dark overflow-hidden">
-      <div className="absolute inset-0 topo-bg opacity-20" />
-      <div className="absolute inset-0 bg-gradient-to-br from-geo-cyan/3 via-transparent to-geo-copper/3" />
+    <section className="section-padding relative bg-white overflow-hidden">
+      <div className="absolute inset-0 topo-bg opacity-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-geo-cyan/5 via-transparent to-slate-50" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
@@ -31,17 +31,18 @@ export default function ProjectsCarousel() {
             titleHighlight="Projects"
             description="Selected case studies from our portfolio of geological exploration and geoscience service projects."
             align="left"
+            tone="light"
           />
           <div className="hidden md:flex items-center gap-3">
             <button
               onClick={prev}
-              className="w-10 h-10 rounded-xl border border-geo-border/40 flex items-center justify-center text-slate-400 hover:text-white hover:border-geo-cyan/30 transition-all"
+              className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:text-geo-dark hover:border-geo-cyan/50 transition-all"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={next}
-              className="w-10 h-10 rounded-xl border border-geo-border/40 flex items-center justify-center text-slate-400 hover:text-white hover:border-geo-cyan/30 transition-all"
+              className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:text-geo-dark hover:border-geo-cyan/50 transition-all"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -58,7 +59,7 @@ export default function ProjectsCarousel() {
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
           >
             {/* Image */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-geo-panel">
+            <div className="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-100 shadow-xl">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -79,35 +80,35 @@ export default function ProjectsCarousel() {
             <div className="space-y-6">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center gap-1.5 text-sm text-slate-400">
+                  <div className="flex items-center gap-1.5 text-sm text-slate-600">
                     <MapPin className="w-3.5 h-3.5 text-geo-copper" />
                     {project.region}
                   </div>
-                  <span className="text-slate-600">·</span>
-                  <span className="text-sm text-slate-400">{project.year}</span>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-sm text-slate-600">{project.year}</span>
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-bold font-display text-white leading-tight">
+                <h3 className="text-2xl lg:text-3xl font-bold font-display text-geo-dark leading-tight">
                   {project.title}
                 </h3>
               </div>
 
-              <p className="text-slate-400 leading-relaxed">{project.description}</p>
+              <p className="text-slate-600 leading-relaxed">{project.description}</p>
 
               {/* Technologies */}
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-geo-panel border border-geo-border/40 text-xs text-slate-400">
+                  <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs text-slate-600">
                     {tech}
                   </span>
                 ))}
               </div>
 
               {/* Outcomes */}
-              <div className="p-4 rounded-xl bg-geo-panel/50 border border-geo-border/30">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                 <div className="text-[10px] font-mono text-geo-cyan tracking-widest uppercase mb-3">Key Outcomes</div>
                 <ul className="space-y-2">
                   {project.outcomes.map((outcome) => (
-                    <li key={outcome} className="flex items-start gap-2 text-sm text-slate-300">
+                    <li key={outcome} className="flex items-start gap-2 text-sm text-slate-700">
                       <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-geo-emerald flex-shrink-0" />
                       {outcome}
                     </li>
@@ -136,7 +137,7 @@ export default function ProjectsCarousel() {
               />
             ))}
           </div>
-          <Link href="/projects" className="text-sm text-geo-copper hover:text-copper-light transition-colors flex items-center gap-1">
+          <Link href="/projects" className="text-sm text-geo-copper hover:text-geo-copper-light transition-colors flex items-center gap-1">
             All Projects
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
