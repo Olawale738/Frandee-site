@@ -90,7 +90,7 @@ export const SERVICES = [
     description: 'Our data scientists and geoscientists transform raw geoscience data into actionable geological intelligence through advanced modeling, geostatistics, and machine learning.',
     icon: 'BarChart3',
     color: 'cyan',
-    image: '/images/field-operations/field-02.jpg',
+    image: '/images/software/oasis-montaj.jpg',
     technologies: ['Leapfrog Geo', 'Oasis Montaj', 'Python', 'R', 'Tableau', 'Power BI'],
     deliverables: ['3D geological models', 'Integrated interpretation reports', 'Resource estimation', 'Data dashboards'],
     process: ['Data compilation & QA/QC', 'Domain modeling', 'Statistical analysis', '3D implicit modeling', 'Resource classification'],
