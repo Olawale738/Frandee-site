@@ -10,6 +10,10 @@ local Docker to a live, secure, monitored deployment.
 
 ## 1. Domain & DNS
 
+For the live `frandeeconsultingservices.com` domain, keep the website records
+pointed at Vercel but point mail records at LyteHosting. See
+[EMAIL_DNS_FIX.md](./EMAIL_DNS_FIX.md) for the exact cPanel records.
+
 1. Register the domain (e.g. `frandeeconsult.com`).
 2. Create DNS records:
    - **Apex (`frandeeconsult.com`)** -> A record to Vercel's IP, or
